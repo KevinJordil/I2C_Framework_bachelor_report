@@ -1,0 +1,46 @@
+Dans le domaine des systèmes embarqués, l'utilisation de modules indépendants à microcontrôleurs est souvent nécessaire pour répartir les tâches et renforcer la modularité et la robustesse des systèmes.
+Cependant, la communication entre ces modules représente un défi majeur.
+C'est là qu'intervient le bus I2C, un protocole de communication simple et efficace permettant de connecter plusieurs modules à un seul bus.
+
+Malgré les avantages du bus I2C, il présente certaines limitations.
+Par exemple, il ne dispose pas d'une couche de gestion d'adresse, ce qui rend la maintenance complexe lorsque plusieurs micrologiciels sont nécessaires pour faire fonctionner l'écosystème.
+De plus, la gestion des mises à jour des modules et la gestion des erreurs de communication posent également des problèmes.
+
+C'est dans ce contexte que ce projet vise à développer un framework innovant pour la gestion d'un écosystème décentralisé sur un bus I2C.
+L'objectif principal est de créer une solution qui permette de gérer les adresses des modules, d'assurer les communications entre ces derniers, ainsi que de faciliter le déploiement automatique de nouveaux micrologiciels sur les modules et la gestion des mises à jour.
+
+Pour atteindre ces objectifs, ce projet se déroulera en plusieurs étapes.
+Tout d'abord, une sélection sera effectuée pour choisir un microcontrôleur compact disposant des périphériques courants et programmable en langage C/C++.
+De préférence, ce microcontrôleur sera compatible avec le framework mbed et basé sur une architecture ARM, comme Cortex-M0+ ou Cortex-M4.
+
+Ensuite, un bootloader sera développé ou utilisé, tel que u-boot, pour permettre le déploiement automatique des nouveaux micrologiciels sur les modules via le bus de communication.
+Ce bootloader devra être compatible avec le framework mbed, et la gestion des versions firmware se fera à l'aide d'un hash.
+
+À l'issue de ce travail, plusieurs tâches clés seront accomplies, notamment le développement d'un écosystème I2C pour les microcontrôleurs, la sélection d'un framework de développement adapté, le choix d'un microcontrôleur approprié, l'implémentation d'un système d'auto-adressage des éléments du bus, ainsi que la création d'un bootloader permettant la mise à jour automatique des micrologiciels embarqués.
+De plus, une interface POSIX sera développée pour faciliter l'interaction avec les éléments du bus.
+Un démonstrateur du système sera réalisé, mettant en évidence toutes les fonctionnalités mentionnées précédemment.
+Le code source de ce projet sera livré sous GitHub, accompagné d'une documentation adéquate.
+
+En résumé, ce projet vise à développer un framework novateur pour la gestion d'un écosystème décentralisé sur le bus I2C, en apportant des solutions aux problèmes de gestion d'adresses, de communication, de déploiement de micrologiciels et de maintenance.
+L'objectif final est de faciliter la mise en place et la gestion de systèmes embarqués modulaires et robustes, tout en offrant une flexibilité et une fiabilité accrues.
+
+\section{Contexte}
+Le club de robotique de l'HEIG participe au concours international de robotique amateur, Eurobot.
+Ce concours met en compétition des équipes de jeunes, qu'elles soient constituées d'étudiants ou de clubs indépendants.
+Au fil des années, il est apparu que la gestion des capteurs présents sur les robots était un besoin essentiel.
+En effet, chaque année, les robots doivent être adaptés aux nouvelles contraintes du concours.
+Toutefois, de nombreux capteurs utilisés restent les mêmes d'une année à l'autre.
+Par conséquent, il serait intéressant de pouvoir réutiliser facilement ces capteurs.
+C'est dans ce contexte que ce projet a été proposé.
+
+Sur le marché, les capteurs disponibles offrent des interfaces de communication qui diffèrent d'un capteur à l'autre.
+L'objectif de ce projet est donc de créer un écosystème regroupant tous les capteurs sur un même bus de communication, facilitant ainsi leur intégration dans les robots.
+De plus, il est nécessaire de mettre en place une gestion des mises à jour des capteurs via le protocole de communication utilisé.
+
+En développant cet écosystème, cela vise à améliorer l'efficacité et la réutilisabilité des capteurs d'année en année, ce qui permettra de réduire les coûts de développement et d'optimiser les performances des robots.
+La création d'un système de communication unifié et la mise en place d'une procédure de mise à jour simplifiée contribueront à rendre le processus de développement plus efficace et plus fluide.
+
+Ce projet représente une occasion exceptionnelle de relever le défi technique et logistique de la gestion des capteurs dans le cadre d'une compétition robotique.
+En effet, il combine à la fois des aspects logiciels et matériels essentiels.
+Étant donné que l'espace disponible à l'intérieur d'un robot est limité, il est primordial de concevoir un système compact et efficace.
+De plus, la gestion des capteurs doit être à la fois simple et performante afin de permettre son utilisation par les étudiants tout au long de leur cursus de bachelor.

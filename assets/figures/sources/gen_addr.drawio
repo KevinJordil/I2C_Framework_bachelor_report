@@ -1,0 +1,69 @@
+<mxfile host="app.diagrams.net" modified="2023-07-10T12:03:58.867Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" version="21.6.1" etag="Ay5sZ5sCA0rPmtr13CdS" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1647" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="sJbp4u433FHdV_H70Yux-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-3" target="sJbp4u433FHdV_H70Yux-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-3" value="&lt;font face=&quot;computer modern&quot; style=&quot;font-size: 11px;&quot; data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot;&gt;Génération de l&#39;adresse&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="285" y="70" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-0" target="WIyWlLk6GJQsqaUBKTNV-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-0" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="335" y="20" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-2" target="sJbp4u433FHdV_H70Yux-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-2" value="&lt;font face=&quot;computer modern&quot; style=&quot;font-size: 11px;&quot; data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot;&gt;Génération du temps d&#39;attente&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="285" y="140" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-16" value="Oui" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=0;fontFamily=computer modern;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3Dcomputer%2Bmodern;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-8" target="sJbp4u433FHdV_H70Yux-15" edge="1">
+          <mxGeometry y="13" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-8" target="sJbp4u433FHdV_H70Yux-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-8" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot; face=&quot;computer modern&quot;&gt;Adresse déjà attribuée ?&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=asap;fontSize=11;align=center;strokeWidth=1;spacing=6;spacingTop=-4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3Dasap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="295" y="346" width="95" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-9" target="sJbp4u433FHdV_H70Yux-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-9" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot; face=&quot;computer modern&quot;&gt;Attente du temps généré&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;glass=0;strokeWidth=1;shadow=0;fontFamily=asap;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3Dasap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="285" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-12" target="sJbp4u433FHdV_H70Yux-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-12" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot; face=&quot;computer modern&quot;&gt;Activation de l&#39;I2C&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;glass=0;strokeWidth=1;shadow=0;fontFamily=asap;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3Dasap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="285" y="280" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-15" target="sJbp4u433FHdV_H70Yux-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-15" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot; face=&quot;computer modern&quot;&gt;Incrément de l&#39;adresse&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;glass=0;strokeWidth=1;shadow=0;fontFamily=asap;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3Dasap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="414" y="363" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sJbp4u433FHdV_H70Yux-18" target="sJbp4u433FHdV_H70Yux-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-18" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=computer+modern&quot; face=&quot;computer modern&quot;&gt;Activation du périphérique&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;glass=0;strokeWidth=1;shadow=0;fontFamily=asap;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3Dasap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="282.5" y="442" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-20" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="327.5" y="504" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sJbp4u433FHdV_H70Yux-21" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="332.5" y="509" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

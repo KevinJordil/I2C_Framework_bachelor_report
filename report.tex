@@ -1,0 +1,89 @@
+\documentclass[
+    reds, % Saisir le nom de l'institut rattaché
+    ie, % Saisir le nom de l'orientation
+    %confidential, % Décommentez si le travail est confidentiel
+]{heig-tb}
+
+\usepackage[nooldvoltagedirection,european,americaninductors]{circuitikz}
+
+%% Custom packages
+\usepackage{multirow}
+
+\signature{signature/kjordil} %TODO modifier le fichier de la signature (doit être un pdf)
+
+\makenomenclature
+\makenoidxglossaries
+\makeindex
+
+\addbibresource{bibliography.bib}
+
+\input{nomenclature}
+\input{acronyms}
+\input{glossary}
+\input{meta}
+
+\surroundwithmdframed{minted}
+
+%% Début du document
+\begin{document}
+\selectlanguage{french}
+\maketitle
+\frontmatter
+\clearemptydoublepage
+
+%% Requis par les dispositions générales des travaux de Bachelor
+\preamble
+\authentification
+
+%% Résumé / Version abbrégée
+\begin{abstract}
+    \input{abstract}
+\end{abstract}
+
+%% Sommaire et tables
+\clearemptydoublepage
+{
+    \tableofcontents
+    \let\cleardoublepage\clearpage
+    \listoffigures
+    \let\cleardoublepage\clearpage
+    \listoftables
+    \let\cleardoublepage\clearpage
+    \listoflistings
+}
+
+\printnomenclature
+\clearemptydoublepage
+\pagenumbering{arabic}
+
+%% Contenu
+\mainmatter
+\chapter{Introduction}
+\input{sections/introduction}
+\chapter{Cahier des charges}
+\input{sections/specifications}
+\chapter{Analyse}
+\input{sections/analysis}
+\chapter{Implémentation}
+\input{sections/implementation}
+\chapter{Démonstrateur}
+\input{sections/demonstrator}
+
+\appendix
+\appendixpage
+\addappheadtotoc
+
+\chapter{Première annexe}
+
+\let\cleardoublepage\clearpage
+\backmatter
+% glossaire, biblio et index
+\label{glossaire}
+\printnoidxglossary
+\printbibliography
+\label{index}
+\printindex
+
+
+
+\end{document}

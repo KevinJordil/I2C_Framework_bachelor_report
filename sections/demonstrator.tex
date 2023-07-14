@@ -1,0 +1,121 @@
+Dans ce chapitre, l'objectif est d'expliquer les choix effectués pour la réalisation d'un démonstrateur fonctionnel mettant en évidence la partie matérielle de ce projet.
+Le démonstrateur se présente sous la forme d'un circuit imprimé intégrant le microcontrôleur sélectionné.
+
+Ce démonstrateur a été conçu en tenant compte de son utilisation potentielle lors des prochaines éditions du concours Eurobot, auquel participe le club de robotique de la HEIG-VD.
+
+\section{Fonctionnalités}
+
+L'objectif de ce démonstrateur est de mettre en évidence les fonctionnalités de l'écosystème I2C de ce projet.
+Pour cela, un circuit imprimé a été conçu, intégrant le microcontrôleur choisi, un capteur de couleur et une LED.
+Ce démonstrateur permet de démontrer toutes les fonctionnalités et peut être utilisé au sein du club de robotique de la HEIG-VD lors des prochaines éditions du concours Eurobot.
+
+\section{Tension electrique}
+
+La tension électrique d'un périphérique sur le bus I2C n'est pas fixée selon une norme précise.
+Cependant, il est courant d'utiliser deux tensions électriques différentes : 3,3V et 5V.
+Dans le cadre de ce projet, il est préférable de choisir une tension compatible avec le microcontrôleur sélectionné.
+Selon la fiche technique du microcontrôleur, la tension d'alimentation recommandée est de 1,71V à 3,6V.
+Il est donc logique d'opter pour une tension de 3,3V pour le bus I2C.
+Cela permet de simplifier le circuit en évitant d'avoir plusieurs composants électroniques pour abaisser la tension du bus.
+
+
+\section{Connecteurs}
+
+Le choix du connecteur est un aspect important à considérer.
+Il doit être à la fois compact et solide.
+La compacité est essentielle pour minimiser la taille du circuit imprimé, en accord avec l'aspect embarqué du projet.
+La solidité du connecteur est primordiale afin de garantir une connexion fiable, même en cas de branchement et débranchement fréquents.
+
+Le connecteur sélectionné doit comporter quatre broches pour l'I2C, comprenant l'alimentation du circuit imprimé (3,3V et GND) ainsi que les broches pour l'I2C (SDA et SCL).
+
+Dans le cadre de ce projet, deux connecteurs ont été analysés.
+Le connecteur QWIIC de Sparkfun, largement utilisé pour les périphériques I2C, et le connecteur Micro MaTch de TE Connectivity.
+
+\subsection{QWIIC}
+
+Le connecteur QWIIC proposé par Sparkfun est compact.
+En effet, pour un connecteur à quatre broches, la partie s'intégrant au circuit imprimé mesure 2,95 mm de hauteur, 6,25 mm de longueur et 7 mm de largeur.
+Cependant, il peut être difficile de l'assembler soi-même sans l'outil approprié.
+Il est préférable d'acheter des câbles pré-confectionnés, mais cela limite la possibilité de réaliser des câbles sur mesure sans avoir besoin de connecteurs supplémentaires.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{./assets/figures/qwiic.jpg}
+    \caption{\cite{qwiic} Connecteur QWIIC}
+\end{figure}
+
+En résumé, le connecteur QWIIC est compact mais peut être difficile à assembler sans l'outil approprié.
+
+\subsection{Micro MaTch}
+
+Le connecteur Micro MaTch, fabriqué par la société suisse TE Connectivity, présente l'avantage de pouvoir être assemblé manuellement avec des câbles plats.
+En effet, les deux parties du connecteur viennent pincer le câble plat, établissant ainsi la connexion électrique.
+La taille du connecteur pour quatre broches sur le circuit imprimé mesure 5,3 mm de hauteur, 6,9 mm de longueur et 9,7 mm de largeur.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.08]{./assets/figures/micromatch.png}
+    \caption{\cite{micromatch} Connecteur Micro MaTch}
+\end{figure}
+
+En résumé, il est facile d'assembler le connecteur Micro MaTch à un câble plat, mais il n'est pas aussi compact que le connecteur QWIIC.
+
+\subsection{Choix}
+
+Le choix s'est porté sur le connecteur Micro MaTch.
+En effet, il est facile à assembler manuellement et offre une compacité satisfaisante.
+Bien qu'il soit légèrement moins compact que le connecteur QWIIC, cette différence ne pose pas de problème majeur.
+Il est préférable d'avoir un connecteur légèrement plus grand en échange d'une meilleure solidité.
+L'avantage principal du connecteur Micro MaTch est la possibilité de l'assembler manuellement sans avoir besoin d'un équipement spécifique.
+La référence du connecteur Micro Match choisi est 338069-4.
+
+\section{Circuit imprimé}
+
+La conception du circuit imprimé a été confiée à l'institut d'automatisation industrielle (IAI) de la HEIG-VD, afin de maintenir une conception interne offrant une flexibilité pour les modifications ultérieures.
+Cette approche permet également de maintenir une cohérence avec les autres projets de l'institut.
+Le logiciel Altium Designer a été utilisé pour concevoir le circuit imprimé, en veillant à ce qu'il soit aussi compact que possible tout en facilitant la soudure.
+Le circuit a été commandé chez Eurocircuit, et la soudure des composants a été réalisée par l'institut d'automatisation industrielle.
+
+\section{Débogueur}
+
+Il est possible d'effectuer la mise à jour du nouveau micrologiciel du microcontrôleur via le bus I2C.
+Cependant, pour assurer son fonctionnement, il est nécessaire que le chargeur de démarrage préalablement développé dans le projet soit déjà présent.
+Ainsi, il est nécessaire d'avoir un moyen d'implanter initialement le chargeur de démarrage sur le microcontrôleur.
+À cet effet, il est requis de disposer d'un connecteur sur le circuit imprimé permettant d'accéder aux broches de programmation.
+Le système de connecteur Tag Connect a été choisi à cet effet, car il présente uniquement des trous sur le circuit imprimé.
+La connexion s'effectue à l'aide d'un câble spécifique.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{./assets/figures/tag_connect.png}
+    \caption{\cite{tag_connect} Câble Tag Connect}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{./assets/figures/tag_connect_pcb.jpg}
+    \caption{\cite{tag_connect_pcb} Câble Tag Connect connecté au circuit imprimé}
+\end{figure}
+
+De plus, un adaptateur est nécessaire pour établir une connexion ST-LINK avec l'ordinateur.
+Le ST-LINK est un débogueur et programmateur pour les microcontrôleurs STM8 et STM32, qui assure la liaison entre l'ordinateur et le microcontrôleur.
+Grâce à cette configuration, il est possible de programmer le chargeur de démarrage pour la première fois.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{./assets/figures/st_link.jpg}
+    \caption{\cite{st_link} Débogueur et programmateur ST-LINK}
+\end{figure}
+
+Étant donné que le chargeur de démarrage doit être programmé une seule fois, il serait envisageable de le faire sur une partie fragile du circuit imprimé.
+Ainsi, une fois programmé, cette partie fragile pourrait être retirée pour gagner de l'espace sur le circuit imprimé.
+Cependant, cette approche n'a pas été utilisée dans le circuit imprimé réalisé, car la programmation du chargeur de démarrage sera réalisée à plusieurs reprises dans le cadre de ce projet.
+Par conséquent, il est plus pratique de conserver le connecteur sur le circuit imprimé.
+
+\section{Tests}
+
+TODO Expliquer ce qui a été fait pour tester la carte
+
+\section{Carte d'extension}
+
+TODO Raspberry shield connecteur Micro Match
