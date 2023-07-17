@@ -69,6 +69,8 @@ Il est préférable d'avoir un connecteur légèrement plus grand en échange d'
 L'avantage principal du connecteur Micro MaTch est la possibilité de l'assembler manuellement sans avoir besoin d'un équipement spécifique.
 La référence du connecteur Micro Match choisi est 338069-4.
 
+Cependant, il est important de noter que le connecteur n'est pas un élément essentiel. Il peut être remplacé par un autre connecteur existant pour s'adapter à d'autres projets. Un minimum de 4 broches est nécessaire pour l'alimentation et l'I2C.
+
 \section{Circuit imprimé}
 
 La conception du circuit imprimé a été confiée à l'institut d'automatisation industrielle (IAI) de la HEIG-VD, afin de maintenir une conception interne offrant une flexibilité pour les modifications ultérieures.
@@ -112,10 +114,14 @@ Ainsi, une fois programmé, cette partie fragile pourrait être retirée pour ga
 Cependant, cette approche n'a pas été utilisée dans le circuit imprimé réalisé, car la programmation du chargeur de démarrage sera réalisée à plusieurs reprises dans le cadre de ce projet.
 Par conséquent, il est plus pratique de conserver le connecteur sur le circuit imprimé.
 
+\section{Carte d'extension}
+
+Pour se rapprocher au maximum d'une situation réelle, il est intéressant de mettre en place une carte d'extension pour le Raspberry Pi.
+Cette carte d'extension permet d'utiliser le même connecteur que celui choisi sur la carte principale.
+Ainsi, il est plus facile de connecter et déconnecter des périphériques plutôt que d'utiliser des câbles Dupont.
+Il convient de souligner que cette carte d'extension n'est pas un circuit imprimé sophistiqué, mais simplement une plaque d'expérimentation (veroboard) équipée d'un connecteur et des connexions nécessaires.
+
 \section{Tests}
 
 TODO Expliquer ce qui a été fait pour tester la carte
 
-\section{Carte d'extension}
-
-TODO Raspberry shield connecteur Micro Match

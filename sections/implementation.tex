@@ -173,3 +173,32 @@ Grâce à cette méthode, il est possible de stocker des données liées à une 
     \includegraphics[scale=1.3]{./assets/figures/metadata.pdf}
     \caption{Schéma de la répartition mémoire du microcontrôleur avec les métadonnées}
 \end{figure}
+
+\section{Interface POSIX}
+
+Dans cette section, la mise en \oe{}uvre de l'interface POSIX sera détaillée. L'explication des raisons pour lesquelles l'interface a été mise en \oe{}uvre de cette manière et les choix effectués seront abordés.
+
+\subsection{Environnement}
+
+Dans ce projet, aucun environnement matériel final n'est défini. L'objectif consiste à créer un écosystème sur le bus I2C qui peut être réutilisé par d'autres projets. Par conséquent, une interface doit être développée pour être utilisée avec la plupart des maîtres I2C.
+
+Il existe deux types de maîtres I2C possibles. Un maître équipé d'un système d'exploitation, généralement Linux, et un maître sans système d'exploitation, généralement un microcontrôleur. Il convient toutefois de noter qu'une fonctionnalité importante de l'interface POSIX est le déploiement de nouveaux micrologiciels. Par conséquent, le maître I2C doit être capable de mettre à jour, puis de compiler et finalement d'envoyer le micrologiciel.
+
+\subsection{Choix du langage}
+
+En prenant en compte les deux types de maîtres possibles, il convient de déterminer lequel est plus approprié à mettre en avant.
+Étant donné la nécessité de modifier et de compiler le code avant de pouvoir l'envoyer, il est peu pertinent de privilégier le maître basé sur un microcontrôleur avec l'écosystème développé.
+Par conséquent, il est plus intéressant de construire une interface fonctionnant sur un système d'exploitation. Les explications d'implémentation détaillées permettront, si nécessaire, de créer une interface adaptée à un environnement plus spécifique.
+
+Plusieurs options sont envisageables en ce qui concerne le langage de programmation.
+Il est possible d'opter pour un langage tel que C ou C++, ou bien de se tourner vers Python.
+Étant donné qu'il s'agit davantage de scripts avancés que d'un véritable programme, il est plus intéressant d'utiliser Python.
+Il convient parfaitement à la réalisation d'une interface POSIX et bénéficie de bibliothèques facilitant le développement.
+
+\subsection{Fonctionnement}
+
+Dans cette sous-section, l'objectif consiste à expliquer l'implémentation de chaque partie de l'interface POSIX.
+Cela permet de comprendre les choix effectués et d'adapter l'interface POSIX en fonction des besoins spécifiques.
+
+\subsubsection{Mise à jour du micrologiciel}
+
