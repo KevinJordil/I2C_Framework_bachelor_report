@@ -96,7 +96,7 @@ On trouve également des projets qui utilisent le C++, le Rust et le Python, bie
 La première option courante consiste donc à utiliser le langage C.
 Cependant, il est intéressant d'explorer les autres langages de programmation, en particulier le C++, afin de déterminer leur pertinence pour ce projet.
 
-Le choix du langage de programmation dépendra des fonctionnalités et des possibilités offertes par le \textit{framework} de développement sélectionné.
+Le choix du langage de programmation dépendra des fonctionnalités et des possibilités offertes par le \textit{\gls{framework}} de développement sélectionné.
 
 \subsection{Boitiers}
 
@@ -178,24 +178,24 @@ En analysant ces résultats, il est remarqué qu'il y a une présence significat
 Cette famille est étendue, ce qui en fait un choix privilégié.
 Après avoir examiné les datasheets, deux microcontrôleurs répondent aux exigences du projet : le STM32G031G6U6 et le STM32G071GBU6.
 La principale différence entre les deux réside dans la quantité de mémoire flash et de RAM.
-Dans ce projet, l'objectif est d'utiliser un \textit{framework} avec un chargeur de démarrage et un micrologiciel.
+Dans ce projet, l'objectif est d'utiliser un \textit{\gls{framework}} avec un chargeur de démarrage et un micrologiciel.
 Par conséquent, il est préférable de choisir le STM32G071GBU6 qui offre une plus grande capacité de mémoire flash et de RAM.
 Cela évitera de rencontrer des problèmes de mémoire lorsque des fonctionnalités supplémentaires seront ajoutées ultérieurement dans le projet.
 
-\section{Frameworks}
+\section{\gls{framework}s}
 
-Pour assurer un fonctionnement simple, une maintenance aisée et une portabilité du code, l'utilisation d'un \textit{framework} de développement est intéressante.
+Pour assurer un fonctionnement simple, une maintenance aisée et une portabilité du code, l'utilisation d'un \textit{\gls{framework}} de développement est intéressante.
 Celui-ci fait le lien entre un code plus abstrait et un code spécifique au microcontrôleur.
-Il est important de pouvoir accéder aux fonctionnalités de bas niveau du microcontrôleur lorsque celles-ci ne sont pas réalisées de manière plus abstraite dans le \textit{framework}.
+Il est important de pouvoir accéder aux fonctionnalités de bas niveau du microcontrôleur lorsque celles-ci ne sont pas réalisées de manière plus abstraite dans le \textit{\gls{framework}}.
 Ainsi, il doit faciliter le développement de fonctionnalités spécifiques et disposer d'une documentation complète.
 Il doit également être maintenu et utilisé par une communauté active, ce qui permet de trouver des solutions aux problèmes plus facilement.
-De plus, le \textit{framework} doit être compatible avec le microcontrôleur STM32 choisi.
-Trois \textit{frameworks} potentiels répondent à ces critères, il s'agit de Mbed, Arduino et STM32Cube.
-Il convient d'analyser et de comparer ces \textit{frameworks} pour déterminer lequel est le plus adapté à ce projet.
+De plus, le \textit{\gls{framework}} doit être compatible avec le microcontrôleur STM32 choisi.
+Trois \textit{\gls{framework}s} potentiels répondent à ces critères, il s'agit de Mbed, Arduino et STM32Cube.
+Il convient d'analyser et de comparer ces \textit{\gls{framework}s} pour déterminer lequel est le plus adapté à ce projet.
 
 \subsection{Arduino}
 
-Le \textit{framework} Arduino est largement adopté par les amateurs d'électronique pour leurs projets personnels, mais il est moins couramment utilisé dans le milieu professionnel.
+Le \textit{\gls{framework}} Arduino est largement adopté par les amateurs d'électronique pour leurs projets personnels, mais il est moins couramment utilisé dans le milieu professionnel.
 Bien qu'il permette une implémentation rapide des fonctionnalités, il peut manquer d'optimisation par rapport à une plateforme dédiée.
 La communauté qui entoure Arduino est vaste, mais elle est principalement constituée d'amateurs.
 La documentation disponible peut être moins claire, avec une prédominance de forums et de tutoriels orientés vers des projets personnels.
@@ -209,7 +209,7 @@ Cette situation peut être contraignante si l'on souhaite utiliser l'écosystèm
 
 \subsection{STM32Cube}
 
-Le \textit{framework} STM32Cube est développé par STMicroelectronics, le fabricant du microcontrôleur STM32, et il est intégré à l'IDE STM32CubeIDE.
+Le \textit{\gls{framework}} STM32Cube est développé par STMicroelectronics, le fabricant du microcontrôleur STM32, et il est intégré à l'IDE STM32CubeIDE.
 Il offre une compatibilité optimale avec les microcontrôleurs STM32, permettant de tirer pleinement parti de leurs fonctionnalités.
 Il offre une interface conviviale pour configurer les broches du microcontrôleur en fonction des fonctionnalités souhaitées.
 Cependant, il peut être assez verbeux, ce qui signifie que l'utilisateur doit écrire son code dans des zones spécifiques et délimitées par des commentaires.
@@ -220,7 +220,7 @@ Cependant, les forums sont souvent une source précieuse d'informations, avec so
 
 \subsection{Mbed}
 
-Mbed est un \textit{framework} développé en collaboration par Arm et ses partenaires technologiques, spécialement conçus pour les microcontrôleurs ARM Cortex-M 32 bits.
+Mbed est un \textit{\gls{framework}} développé en collaboration par ARM et ses partenaires technologiques, spécialement conçus pour les microcontrôleurs ARM Cortex-M 32 bits.
 Il offre une documentation officielle très complète, qui se classe souvent en tête des résultats de recherche lorsqu'il s'agit d'implémenter des fonctionnalités spécifiques.
 Les forums Mbed sont également une ressource précieuse, avec une présence notable de professionnels expérimentés.
 
@@ -233,11 +233,11 @@ La seule condition est d'inclure la notice de licence et les droits d'auteur dan
 
 \subsection{Choix}
 
-Suite à l'analyse des trois \textit{frameworks}, Mbed est choisi comme le plus approprié pour ce projet.
+Suite à l'analyse des trois \textit{\gls{framework}s}, Mbed est choisi comme le plus approprié pour ce projet.
 Il répond de manière optimale aux critères définis.
 Mbed dispose d'une documentation complète, abondamment illustrée d'exemples concrets.
 Une communauté dynamique, principalement composée de professionnels expérimentés, anime les forums associés.
-Le \textit{framework} offre également un accès aux fonctionnalités de bas niveau du microcontrôleur, si besoin.
+Le \textit{\gls{framework}} offre également un accès aux fonctionnalités de bas niveau du microcontrôleur, si besoin.
 Par ailleurs, Mbed est un projet open source, accompagné d'une licence qui permet une grande flexibilité pour les futures utilisations du projet.
 
 \section{Interface POSIX}
