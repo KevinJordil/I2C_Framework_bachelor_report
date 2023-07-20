@@ -82,20 +82,21 @@ Le circuit a été commandé chez Eurocircuit, et la soudure des composants a é
 Il est possible d'effectuer la mise à jour du nouveau micrologiciel du microcontrôleur via le bus I2C.
 Cependant, pour assurer son fonctionnement, il est nécessaire que le chargeur de démarrage préalablement développé dans le projet soit déjà présent.
 Ainsi, il est nécessaire d'avoir un moyen d'implanter initialement le chargeur de démarrage sur le microcontrôleur.
-À cet effet, il est requis de disposer d'un connecteur sur le circuit imprimé permettant d'accéder aux broches de programmation.
-Le système de connecteur Tag Connect a été choisi à cet effet, car il présente uniquement des trous sur le circuit imprimé.
-La connexion s'effectue à l'aide d'un câble spécifique.
+À cette fin, il est nécessaire d'avoir un connecteur sur le circuit imprimé permettant d'accéder aux broches de programmation.
+La marque \textit{Tag Connect} propose des solutions de câbles de connexion avec un connecteur directement intégré sur le circuit imprimé pour la programmation.
+La solution choisie est le câble à six broches sans pattes, ce qui permet un encombrement minimal sur le circuit imprimé.
+De plus, des adaptateurs du câble \textit{Tag Connect} vers le boîtier de programmation sont également disponibles.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.2]{./assets/figures/tag_connect.png}
-    \caption{\cite{tag_connect} Câble Tag Connect}
+    \caption{\cite{tag_connect} Câble Tag Connect six broches sans pattes}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.2]{./assets/figures/tag_connect_pcb.jpg}
-    \caption{\cite{tag_connect_pcb} Câble Tag Connect connecté au circuit imprimé}
+    \caption{\cite{tag_connect_pcb} Câble Tag Connect six broches sans pattes connecté au circuit imprimé}
 \end{figure}
 
 De plus, un adaptateur est nécessaire pour établir une connexion ST-LINK avec l'ordinateur.
