@@ -92,11 +92,11 @@ La première information est un nombre magique, identique à chaque fois et pré
 Ainsi, ce dernier peut simplement vérifier si la première donnée de l'en-tête correspond effectivement au nombre magique prévu.
 
 Ensuite, il est nécessaire de garantir la validité du micrologiciel.
-Pour cela, Mbed permet d'ajouter un code de contrôle de redondance cyclique (CRC) dans l'en-tête de l'application, qui est automatiquement calculé lors de la génération de l'application.
-Le chargeur de démarrage peut alors calculer le CRC de l'application et le comparer à celui de l'en-tête.
-Si les deux CRC correspondent, cela signifie que le micrologiciel est valide.
+Pour cela, Mbed permet d'ajouter un code de \gls{crc} dans l'en-tête de l'application, qui est automatiquement calculé lors de la génération de l'application.
+Le chargeur de démarrage peut alors calculer le \gls{crc} de l'application et le comparer à celui de l'en-tête.
+Si les deux \gls{crc} correspondent, cela signifie que le micrologiciel est valide.
 
-Le contrôle de redondance cyclique (CRC) est un mécanisme utilisé pour détecter les erreurs de transmission de données.
+Le \gls{crc} est un mécanisme utilisé pour détecter les erreurs de transmission de données.
 Il consiste à générer un code de contrôle en effectuant des calculs mathématiques sur les données à transmettre.
 Comme il s'agit d'un calcul, il peut être recalculé lors de la réception.
 
@@ -130,11 +130,13 @@ Cependant, il est nécessaire d'informer le chargeur de démarrage d'attendre un
 Pour ce faire, le chargeur de démarrage s'arrête et attend une mise à jour dans certaines conditions :
 
 \begin{itemize}
-    \item L'application demande un redémarrage logiciel.
-    \item Un redémarrage matériel est effectué via le bouton de réinitialisation. XXXXXXXXXXXXXXXXXXXXXXX
+    \item L'application doit être mise à jour.
     \item L'application ne présente pas le bon nombre magique.
-    \item L'application ne présente pas le bon code de contrôle de redondance cyclique (CRC).
+    \item L'application ne présente pas le bon \gls{crc}.
 \end{itemize}
+
+L'application peut se qualifiée de "sujette à mise à jour".
+En conséquence, le chargeur de démarrage peut être programmé pour attendre une mise à jour tant que le nombre magique et le \gls{crc} sont corrects.
 
 Une fois que le chargeur de démarrage sait qu'il doit attendre une mise à jour, il reste en attente de la mise à jour via le bus I2C.
 Une fois que le nouveau micrologiciel est reçu et vérifié, le chargeur de démarrage démarre avec le nouveau micrologiciel.
