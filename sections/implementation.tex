@@ -80,9 +80,11 @@ Les données du micrologiciel sont stockées dans un tampon déclaré dans le co
 
 La mémoire vive du microcontrôleur choisi a une capacité de 36 kilo-octets.
 La taille d'un micrologiciel avec Mbed, incluant une simple réponse I2C, est d'environ 30 kilo-octets.
-'ajout de fonctionnalités supplémentaires augmentera la taille du micrologiciel.
+L'ajout de fonctionnalités supplémentaires augmentera la taille du micrologiciel.
 
-Étant donné que les secteurs du microcontrôleur STM32 ont une taille de 2048 octets et que la mémoire vive est capable de stocker cette taille de données, il est possible de stocker un secteur dans la mémoire vive et de l'envoyer via le bus I2C.
+La taille des morceaux a été fixée à 1024 octets. Cette valeur a été sélectionnée pour sa facilité de représentation en termes du nombre de morceaux qui seront envoyés pour le micrologiciel.
+De plus, cette taille s'adapte parfaitement à la mémoire vive, même en cas d'utilisation intensive.
+Il s'agit d'une taille pertinente qui permet d'optimiser le temps d'envoi en termes du nombre de morceaux, tout en minimisant le temps d'écriture sur la mémoire flash entre deux communications I2C.
 
 \subsection{Detection d'un micrologiciel valide}
 
