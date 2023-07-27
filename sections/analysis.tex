@@ -296,12 +296,6 @@ Il permet de différencier de manière unique les périphériques les uns des au
 Cet identifiant est prédéfini par le fabricant et ne peut être modifié.
 Grâce à ce champ, il est possible à tout moment de distinguer les périphériques entre eux de manière univoque.
 
-\subsection{Informations détaillées}
-
-Une fois les périphériques détectés, il est important d'obtenir des informations détaillées sur chaque périphérique.
-Ces informations permettent de connaître l'état actuel du périphérique ainsi que ses caractéristiques spécifiques.
-Il est également utile de savoir quelles commandes sont supportées par le périphérique, ce qui facilite son interaction et son utilisation dans le projet.
-
 \subsection{Mise à jour du micrologiciel}
 
 La mise à jour du micrologiciel est une fonctionnalité clé de l'interface POSIX.
@@ -401,3 +395,27 @@ Si tel est le cas, il peut recevoir une notification indiquant la disponibilité
 
 En résumé, le système présenté offre la possibilité de mettre à jour les composants du bus I2C de manière automatique en modifiant le code sur Github à partir de n'importe quel ordinateur.
 Cette approche présente un avantage significatif en termes de flexibilité, évitant ainsi les contraintes liées à une mise à jour traditionnelle qui exige l'utilisation d'un câble de reprogrammation pour chaque périphérique.
+
+\section{Gestion des erreurs}
+
+La gestion des erreurs n'étant pas prise en charge de manière native sur un bus I2C, il est pertinent de mettre en place un système de secours pour redémarrer les périphériques en cas de problèmes.
+Dans un premier temps, il est nécessaire de détecter les erreurs.
+Cette tâche peut être complexe à première vue, car les erreurs doivent être détectées depuis les périphériques esclaves du bus, étant donné que c'est l'élément contrôlé de manière totale.
+
+Dans un deuxième temps, il est requis de trouver une solution pour résoudre le problème.
+La solution la plus simple consiste à redémarrer le microcontrôleur.
+Cela garantit que si le maître I2C bloque la communication sur le périphérique, le redémarrage mettra fin à cet échange et réglera le problème.
+
+Afin d'explorer les différentes solutions possibles pour détecter les erreurs de manière efficace, cette section se concentrera sur cette problématique.
+
+\section{Passage en mode maître}
+
+Une solution envisagée pour détecter les erreurs sur le bus I2C consiste à transformer périodiquement les esclaves I2C en maîtres pour analyser le bus.
+Cela permettrait de détecter facilement les erreurs sur le bus.
+Cependant, cette approche présente un désavantage important : lorsque le périphérique est en mode maître, il n'est plus disponible en tant qu'esclave pour répondre à ses tâches habituelles.
+
+Ce désavantage rend cette solution non viable, car il est inacceptable de rendre le système inopérant pour détecter les erreurs du bus.
+
+\section{Analyse des signaux}
+
+L'analyse des signaux est une solution qui consiste à determiner ce qui est acceptable sur les signaux de l'I2C soit SDA et SCL. Une fois le comportement determiné, il est possible de determiner un comportement qui pose problème. En tant qu'esclave du bus I2C, il est possible d'analyser les signaux du bus I2C sans mettre en péril les communications I2C courantes.

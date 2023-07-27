@@ -74,8 +74,8 @@ Cependant, il est important de noter que le connecteur n'est pas un élément es
 
 La conception du circuit imprimé a été confiée à l'\gls{iai} de la \gls{heigvd}, afin de maintenir une conception interne offrant une flexibilité pour les modifications ultérieures.
 Monsieur Luca Romano est la personne responsable de la conception et de la réalisation de la carte au sein de l'\gls{iai}. Cette approche vise également à maintenir une cohérence avec les autres projets de l'institut.
-Le logiciel Altium Designer a été utilisé pour concevoir le circuit imprimé, en veillant à ce qu'il soit aussi compact que possible tout en facilitant la soudure.
-Le circuit a été commandé chez Eurocircuit, et la soudure des composants a été réalisée par l'institut d'automatisation industrielle.
+Le logiciel Altium Designer a été utilisé pour concevoir le circuit imprimé, en veillant à ce qu'il soit aussi compact que possible tout en facilitant la ba.
+Le circuit a été commandé chez Eurocircuit, et la brasure des composants a été réalisée par l'institut d'automatisation industrielle.
 
 \section{Débogueur}
 
@@ -116,6 +116,14 @@ Par conséquent, il est plus pratique de conserver le connecteur sur le circuit 
 
 \section{Resistance}
 
+Les équipements connectés à un bus I2C utilisent des sorties de type drain ouvert pour les deux lignes SDA et SCL.
+L'état logique \textit{0} ou \textit{LOW} est l'état dominant, tandis que l'état logique \textit{1} ou \textit{HIGH} est l'état récessif.
+Pour maintenir le bus à l'état de repos, des résistances de \textit{pull-up} sont utilisées pour le maintenir au niveau haut.
+
+Par conséquent, il est nécessaire de mettre en place un système qui permet d'activer des résistances de \textit{pull-up} sur le dernier périphérique I2C.
+Ce système doit être facile à activer ou désactiver, sachant que le changement de configuration se fera rarement.
+Si possible, un système simple à braser serait préférable pour faciliter la mise en place de cette fonctionnalité.
+
 \todo{Expliquer le choix fait sur les resistance pull up sur le circuit imprimé}
 
 \section{Carte d'extension}
@@ -127,5 +135,7 @@ Il convient de souligner que cette carte d'extension n'est pas un circuit imprim
 
 \section{Tests}
 
-\todo{Expliquer ce qui a été fait pour tester la carte}
+Les tests matériels de la carte ont été effectués par l'\gls{iai}.
+Lors de la livraison de la carte, il a été confirmé que les tests nécessaires au niveau matériel avaient été réalisés.
+Par conséquent, la prochaine étape consiste à tester la partie logicielle du circuit imprimé pour s'assurer de son bon fonctionnement.
 
