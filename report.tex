@@ -10,6 +10,11 @@
 %% Custom packages
 \usepackage{multirow}
 
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}} % Pour aligner verticalement au milieu
+
+
 \signature{signature/kjordil} %TODO modifier le fichier de la signature (doit être un pdf)
 
 \makenomenclature
@@ -35,6 +40,11 @@
 %% Requis par les dispositions générales des travaux de Bachelor
 \preamble
 \authentification
+
+\clearemptydoublepage
+\chapter{Remerciements}
+\input{sections/thank_you}
+\clearemptydoublepage
 
 %% Résumé / Version abbrégée
 \begin{abstract}
@@ -69,6 +79,10 @@
 \input{sections/implementation}
 \chapter{Démonstrateur}
 \input{sections/demonstrator}
+\chapter{Tests}
+\input{sections/tests}
+\chapter{Améliorations}
+\input{sections/improvements}
 
 \appendix
 \appendixpage

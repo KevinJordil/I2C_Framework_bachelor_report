@@ -157,7 +157,7 @@ Les recherches seront donc effectuées sur Digikey.
 Il convient d'appliquer les filtres suivants :
 
 \begin{itemize}
-    \item Processeur cœur: ARM Cortex-M*
+    \item Processeur c\oe{}ur: ARM Cortex-M*
     \item En stock: Oui
     \item Connectivité: I2C, UART, SPI
     \item Périphériques: PWM
@@ -408,7 +408,7 @@ Cela garantit que si le maître I2C bloque la communication sur le périphériqu
 
 Afin d'explorer les différentes solutions possibles pour détecter les erreurs de manière efficace, cette section se concentrera sur cette problématique.
 
-\section{Passage en mode maître}
+\subsection{Passage en mode maître}
 
 Une solution envisagée pour détecter les erreurs sur le bus I2C consiste à transformer périodiquement les esclaves I2C en maîtres pour analyser le bus.
 Cela permettrait de détecter facilement les erreurs sur le bus.
@@ -416,6 +416,6 @@ Cependant, cette approche présente un désavantage important : lorsque le péri
 
 Ce désavantage rend cette solution non viable, car il est inacceptable de rendre le système inopérant pour détecter les erreurs du bus.
 
-\section{Analyse des signaux}
+\subsection{Analyse des signaux}
 
 L'analyse des signaux est une solution qui consiste à determiner ce qui est acceptable sur les signaux de l'I2C soit SDA et SCL. Une fois le comportement determiné, il est possible de determiner un comportement qui pose problème. En tant qu'esclave du bus I2C, il est possible d'analyser les signaux du bus I2C sans mettre en péril les communications I2C courantes.

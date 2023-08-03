@@ -1,0 +1,101 @@
+Dans ce chapitre, l'objectif est de démontrer que le projet fonctionne sur le démonstrateur réalisé.
+Pour atteindre ce but, une multitude de scénarios de tests ont été mis en place afin de vérifier que toutes les fonctionnalités réagissent correctement.
+Ces tests permettront de valider le bon fonctionnement de l'écosystème et de s'assurer qu'il répond aux spécifications établies dans le cahier des charges.
+
+\section{Scénario de tests}
+
+Lorsqu'un test est effectué sur un microcontrôleur, il fait référence au microcontrôleur choisi dans le cadre du projet sur le démonstrateur réalisé.
+
+\subsection{Génération du micrologiciel}
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Génération du micrologiciel\label{tab:generationmicrologiciel}}
+        \begin{tabularx}{\textwidth}{l|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Compiler un micrologiciel. & L'entête est enrichie avec le nombre magique.                                                           & \checkmark \\
+            Compiler un micrologiciel. & L'entête est dotée de la taille du micrologiciel, générée automatiquement.                   & \checkmark \\
+            Compiler un micrologiciel. & L'entête est complétée par le \gls{crc} du micrologiciel, généré automatiquement.                & \checkmark \\
+            Compiler un micrologiciel. & L'entête inclut le \textit{hash} de version du micrologiciel, généré automatiquement. & \checkmark
+        \end{tabularx}
+    \end{center}
+\end{table}
+
+\subsection{Chargeur de démarrage}
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Chargeur de démarrage\label{tab:chargeurdemarrage}}
+        \begin{tabularx}{\textwidth}{X|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Lorsque le microcontrôleur est équipé uniquement d'un chargeur de démarrage. & Le microcontrôleur reste en attente dans le chargeur de démarrage pour recevoir un micrologiciel. & \checkmark
+        \end{tabularx}
+    \end{center}
+\end{table}
+
+\subsection{Déploiement via I2C}
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Déploiement via I2C\label{tab:deploiementi2c}}
+        \begin{tabularx}{\textwidth}{X|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Déployer un micrologiciel lorsque le microcontrôleur est dans l'application. & Le micrologiciel est téléversé. À la fin de l'envoi, le microcontrôleur démarre sur le micrologiciel. & \checkmark \\
+            Déployer un micrologiciel lorsque le microcontrôleur est dans le chargeur de démarrage. & Le micrologiciel est téléversé. À la fin de l'envoi, le microcontrôleur démarre sur le micrologiciel. & \checkmark \\
+            Déployer un micrologiciel sur le microcontrôleur. & Les métadonnées restent intactes. & \checkmark \\
+            Arrêter le déploiement d'un micrologiciel. & Le microcontrôleur ne démarre pas sur un micrologiciel non valide. & \checkmark \\
+            Déployer un micrologiciel sur un microcontrôleur grâce à son adresse. & Le périphérique ayant cette adresse est mis à jour. & \checkmark \\
+            Déployer un micrologiciel sur un microcontrôleur grâce à son groupe. & Le périphérique ayant ce groupe est mis à jour. & \checkmark \\
+            Déployer un micrologiciel sur des microcontrôleurs grâce à leur groupe. & Les périphériques ayant ce groupe sont mis à jour. & \checkmark \\
+            Déployer un micrologiciel sur un microcontrôleur grâce à son type. & Le périphérique ayant ce type est mis à jour. & \checkmark \\
+            Déployer un micrologiciel sur des microcontrôleurs grâce à son type. & Les périphériques ayant ce type sont mis à jour. & \checkmark \\
+        \end{tabularx}
+    \end{center}
+\end{table}
+
+\subsection{Déploiement via le débogueur}
+
+Pour réaliser ces tests, il est nécessaire de connecter la sonde avec le connecteur Tag-Connect, ainsi que de fournir une alimentation.
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Déploiement via le débogueur\label{tab:deploiementdebogueur}}
+        \begin{tabularx}{\textwidth}{X|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Déployer le chargeur de démarrage uniquement. & Le chargeur de démarrage est téléversé et démarre, en attente d'un micrologiciel. & \checkmark \\
+            Déployer le chargeur de démarrage avec une application. & Le chargeur de démarrage est téléversé avec une application et démarre, exécutant le micrologiciel. & \checkmark
+        \end{tabularx}
+    \end{center}
+\end{table}
+
+\subsection{Detection de périphériques}
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Detection de périphériques\label{tab:detectionpériphériques}}
+        \begin{tabularx}{\textwidth}{X|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Scanner le bus I2C avec l'utilitaire linux \textit{i2cdetect} & Les périphériques de l'écosystème sont détectés normalement. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Uniquement les périphériques compatibles avec l'écosystème sont détectés. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & L'identifiant unique de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & L'adresse de chaque périphérique compatible est affichée. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le \textit{hash} du firmware de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le groupe de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le type de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le nom de chaque périphérique compatible est affiché & \checkmark
+        \end{tabularx}
+    \end{center}
+\end{table}
+
+\subsection{Auto-adressage}
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Auto-adressage\label{tab:autoadressage}}
+        \begin{tabularx}{\textwidth}{X|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Déployer le micrologiciel sur un périphérique. & Le périphérique possède une adresse I2C. & \checkmark \\
+            Déployer le même micrologiciel sur deux périphériques. & Chaque périphérique possède une adresse I2C différente. & \checkmark
+        \end{tabularx}
+    \end{center}
+\end{table}

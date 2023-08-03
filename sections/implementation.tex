@@ -1,6 +1,8 @@
 Dans ce chapitre, l'objectif est de fournir une explication détaillée de l'implémentation de chaque composant du projet, en mettant en évidence les choix techniques qui ont été faits.
 Cela permet de donner une vue d'ensemble du projet et d'expliquer les raisons pour lesquelles chaque partie a été mise en place de cette manière spécifique.
 
+\todo{hash firmware}
+
 \section{Matériel}
 
 Pour la mise en place et les tests de ce projet, plusieurs composants matériels sont nécessaires.
@@ -16,6 +18,8 @@ STMicroelectronics fournit une gamme de cartes Nucleo équipées de microcontrô
 La carte NUCLEO-G071RB possède un microcontrôleur STM32 très similaire à celui sélectionné pour ce projet, ce qui la rend idéale pour les tests.
 De plus, elle est équipée d'un connecteur ST-Link qui permet de programmer le microcontrôleur directement depuis un ordinateur via USB.
 Étant donné que c'est une carte de développement, il est facile de connecter des éléments au microcontrôleur via les GPIO.
+
+\todo{Parler de la nouvelle carte et dire pourquoi avoir acheter la nouvelle}
 
 \begin{figure}[H]
     \centering
@@ -199,6 +203,35 @@ Il est possible d'opter pour un langage tel que C ou C++, ou bien de se tourner 
 Étant donné qu'il s'agit davantage de scripts avancés que d'un véritable programme, il est plus intéressant d'utiliser Python.
 Il convient parfaitement à la réalisation d'une interface POSIX et bénéficie de bibliothèques facilitant le développement.
 
+\subsection{Librairie utilisée}
+
+Pour faciliter l'interaction utilisateur, la librairie Python \textit{Click} a été utilisée.
+Elle simplifie l'écriture du code pour les interactions utilisateurs via un terminal de commande.
+\textit{Click} offre la possibilité de spécifier les paramètres que l'utilisateur doit entrer en précisant toutes les spécifications du paramètre, telles que :
+
+\begin{itemize}
+    \item S'il est obligatoire ou facultatif
+    \item Le type de données attendu
+    \begin{itemize}
+        \item Texte
+        \item Numérique entier
+        \item Numérique à virgule flottante
+        \item Booléen
+    \end{itemize}
+    \item Le nom du paramètre
+    \begin{itemize}
+        \item Abrégée (avec un tiret)
+        \item Étendue (avec deux tirets)
+        \item Le nom de l'argument permettant de récupérer la valeur
+    \end{itemize}
+    \item La valeur par défaut du paramètre
+    \item Le description courte du paramètre
+    \item Le texte d'aide du paramètre
+    \item La fonction de vérification du champ
+\end{itemize}
+
+Grâce à ces indications simples à remplir, il est possible de créer une interaction utilisateur complète de manière aisée avec la librairie \textit{Click}.
+
 \subsection{Fonctionnement}
 
 Dans cette sous-section, l'objectif consiste à expliquer l'implémentation de chaque partie de l'interface POSIX.
@@ -206,9 +239,113 @@ Cela permet de comprendre les choix effectués et d'adapter l'interface POSIX en
 
 \subsubsection{Mise à jour du micrologiciel}
 
-\todo{Fonctionnement de la mise à jour du micrologiciel}
+Pour mettre à jour le micrologiciel, deux états sont possibles.
+Le premier état correspond au microcontrôleur étant dans l'application, tandis que le deuxième état indique que le microcontrôleur est dans le chargeur de démarrage, prêt à recevoir une mise à jour du micrologiciel.
+Dans le premier cas, l'objectif est d'atteindre le deuxième état, permettant ainsi d'effectuer la mise à jour du micrologiciel.
+Pour cela, l'utilisateur doit indiquer, via un paramètre du script Python, si le redémarrage du microcontrôleur est nécessaire.
+
+Une fois que le microcontrôleur est dans le chargeur de démarrage, il est prêt à recevoir le nouveau micrologiciel.
+Le script Python découpe alors le fichier binaire du nouveau micrologiciel en morceaux, puis les envoie un à un via le bus I2C pour réaliser la mise à jour.
+
+Une fois que tous les morceaux ont été envoyés avec succès, le script indique que l'envoi de la mise à jour s'est effectué correctement.
+
+Pour réaliser correctement la mise à jour, l'utilisateur doit entrer indiquer plusieurs paramètres. Voici un aperçu de l'aide proposée :
+
+\todo{Texte de l'aide}
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+      $ wget http://tex.stackexchange.com
+    \end{lstlisting}
+    \caption{Mise à jour du micrologiciel - Texte d'aide}
+\end{listing}
+
+Voici un exemple d'affichage du terminal après une mise à jour du micrologiciel
+
+\todo{Texte de mise à jour}
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+      $ wget http://tex.stackexchange.com
+    \end{lstlisting}
+    \caption{Mise à jour du micrologiciel - Résultat}
+\end{listing}
 
 \subsubsection{Analyse du bus}
 
-\todo{Fonctionnement de l'analyse du bus}
+Pour détecter tous les périphériques I2C compatibles avec l'écosystème créé dans ce projet, le script effectue une lecture sur chaque adresse possible sur le bus.
+Si un périphérique répond, la réponse est comparée au nombre magique défini.
+Si le nombre magique correspond, cela indique que le périphérique fait partie de l'écosystème.
+Dans ce cas, les détails de ce périphérique sont récupérés en effectuant une série de communications.
+Une fois que toutes les adresses ont été parcourues, la liste des périphériques avec leurs détails est affichée sur le terminal.
+Ainsi, l'utilisateur peut facilement et rapidement obtenir la liste de tous les composants du bus compatibles avec leur détails.
 
+Pour analyser le bus, un seul paramètre est necessaire, le numéro du bus. Voici un aperçu de l'aide proposée :
+
+\todo{Texte de l'aide}
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+      $ wget http://tex.stackexchange.com
+    \end{lstlisting}
+    \caption{Analyse du bus - Texte d'aide}
+\end{listing}
+
+Voici un exemple d'affichage du terminal après une analyse de bus
+
+\todo{Texte de l'aide}
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+      $ wget http://tex.stackexchange.com
+    \end{lstlisting}
+    \caption{Analyse du bus - Résultat}
+\end{listing}
+
+
+\subsubsection{Modification des métadonnées}
+
+Étant donné que chaque composant du bus possède des métadonnées, il est nécessaire de créer un utilitaire permettant de modifier ces informations.
+Plusieurs champs peuvent être mis à jour :
+
+\begin{itemize}
+    \item Le nom du périphérique
+    \item Le type du périphérique
+    \item Le groupe du périphérique
+\end{itemize}
+
+Le nom et le type sont des champs texte, tandis que le groupe du périphérique est de type numérique.
+Pour mettre à jour l'un de ces paramètres, il est nécessaire de spécifier plusieurs informations.
+Voici un aperçu des paramètres à remplir pour mettre à jour une métadonnée.
+
+\todo{Texte de l'aide}
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+      $ wget http://tex.stackexchange.com
+    \end{lstlisting}
+    \caption{Modification des métadonnées - Texte d'aide}
+\end{listing}
+
+\section{Gestion des erreurs}
+
+Dans le cadre de ce projet, il est pertinent de mettre en place une gestion des erreurs pour améliorer la résolution des problèmes qui peuvent survenir sur le bus I2C.
+La solution choisie consiste à observer les signaux de l'I2C, à savoir SDA et SCL.
+Le signal de l'horloge (SCL) est géré par le maître du bus I2C. Lorsqu'il est en repos, il est à l'état logique 1.
+Ainsi, une attente prolongée à l'état logique 0 sur SCL peut indiquer qu'un esclave I2C ne répond pas comme prévu, alors que le maître attend une réponse.
+En surveillant l'état du signal SCL et en s'assurant qu'il ne reste pas bloqué pendant trop longtemps, il est possible de détecter d'éventuelles erreurs de communication.
+
+Pour cette tâche, un chien de garde ou \textit{watchdog}, en anglais, est mis en place.
+Un délai d'expiration de cinq secondes est fixé.
+Ce temps est réinitialisé chaque fois que le bus est à l'état logique 1.
+Lorsque le chien de garde atteint son délai d'expiration, il redémarre automatiquement le microcontrôleur.
+
+Il convient de noter que cette solution présente un inconvénient : tous les modules de l'écosystème redémarreront, même s'ils ne sont pas directement liés au problème détecté.
+Il est donc essentiel d'être conscient de cette fonctionnalité lors du développement de l'application du microcontrôleur.
+Cependant, il est intéressant de pouvoir récupérer un bus de communication fonctionnel en redémarrant certains modules, même si cela n'était pas strictement nécessaire.
+
+L'analyse d'un signal avec \textit{Mbed} est simple à mettre en place.
+Il suffit de créer un objet de type \textit{DigitalIn} en spécifiant le pin du microcontrôleur.
+Ensuite, il suffit de lire la valeur de cet objet comme s'il s'agissait d'une variable numérique.
+Cette approche facilite l'observation des signaux et permet de détecter les erreurs potentielles sur le bus I2C.
+
+\todo{Auto-adressage}

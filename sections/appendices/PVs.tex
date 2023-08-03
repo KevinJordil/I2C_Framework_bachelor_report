@@ -1,3 +1,176 @@
-\section{PVs}
+Dans un projet comme celui-ci, des séances sont régulièrement organisées avec le superviseur, Monsieur Yves Chevallier.
+Pour conserver une trace des éléments importants discutés pendant le développement du projet, des procès-verbaux des séances sont réalisés.
+L'objectif est de noter les points clés plutôt que chaque phrase ou question posée pendant les séances.
 
-\todo{PVs des séances}
+Pendant les semaines de travail à plein temps, aucune séance hebdomadaire n'était prévue initialement.
+Les séances étaient organisées au besoin uniquement.
+
+Pendant les dernières semaines du travail de bachelor, Monsieur Yves Chevallier était en vacances, ce qui a entraîné des échanges de courriels au lieu de séances en personne.
+
+\section{Vendredi 24 février 2023}
+
+\subsection{Temps de travail}
+
+Un travail de bachelor doit comporter 450 heures de travail, incluant une marge de 20\% pour les imprévus.
+En raison de l'implication au sein du club de robotique, le travail de bachelor sera décalé de deux semaines et se terminera plus tard.
+Le temps de travail pendant le semestre s'élèvera à 8.125 heures par semaine.
+Il est également nécessaire de prévoir 50 heures pour la rédaction du rapport, ce qui inclut le rapport intermédiaire.
+
+\subsection{Projet}
+
+Il est essentiel de se questionner sur le projet et de prendre du recul pour proposer des solutions adaptées à chaque situation.
+En déterminant le pourquoi et le comment, le cadre du projet pourra être fixé.
+
+\subsection{Rendu}
+
+D'ici la fin de la semaine cinq, un cahier des charges et une planification du projet doivent être rendus.
+Cela permettra de générer le cahier des charges au format liste sur Gaps, ce qui sera réalisé lors d'une prochaine séance.
+
+\subsection{Besoin du client}
+
+Les besoins du client sont les suivants :
+\begin{itemize}
+    \item Assurer la pérennité du club de robotique en documentant le projet et en permettant sa réutilisation.
+    \item Apporter un aspect technologique au sein du club de robotique, c'est-à-dire le projet en lui-même.
+    \item Assurer un bon déroulement au sein du club de robotique.
+    \item Apporter une utilité pour les projets au \gls{reds} et à l'\gls{iai}, en ayant un projet au sens large.
+\end{itemize}
+
+\subsection{Technologie}
+
+Il est intéressant d'explorer en profondeur la piste des Nucleo STM32 pour le projet.
+
+\section{Vendredi 3 mars 2023}
+
+\subsection{Bus de communication}
+
+\subsubsection{I2C}
+
+Pour avoir un état haut lorsque le bus I2C est libre, une résistance de type \textit{pull-up} est utilisée.
+Si l'I2C est choisi, il sera nécessaire de mettre en place une gestion des erreurs.
+Pour la résistance de type \textit{pull-up}, une solution possible est d'utiliser un microcontrôleur pour la génération.
+
+\subsubsection{CAN}
+
+Le bus CAN utilise deux transistors pour faire passer le signal, contrairement à l'I2C qui utilise une résistance de type \textit{pull-up}.
+
+La plupart des microcontrôleurs ne possèdent pas de transceiver CAN intégré, ce qui nécessitera l'ajout d'un composant supplémentaire sur le circuit imprimé.
+Il existe peut-être quelques microcontrôleurs avec un transceiver intégré.
+Il faudra mettre une résistance de 120 ohms à chaque bout de la ligne.
+
+\subsubsection{Voitures}
+
+Dans les voitures, il y a un bus principal CAN avec des sous-bus de type LIN.
+Les constructeurs ne veulent généralement pas mettre à jour les micrologiciels de manière accessible, privilégiant une protection maximale, par exemple en utilisant de la mémoire non volatile qui ne peut être écrite qu'une seule fois.
+Cependant, certaines entreprises comme Tesla ont la capacité de mettre à jour le micrologiciel de leurs voitures.
+
+\subsection{Taille du microcontrôleur}
+
+Il serait souhaitable d'utiliser un microcontrôleur de petite taille, par exemple avec des dimensions de 3x3mm ou 4x4mm.
+Sur le circuit imprimé, il est possible de placer des composants des deux côtés.
+Il est également nécessaire de choisir une tension d'alimentation, soit 3.3 Volts, soit 5 Volts.
+Il faudra également décider si un connecteur sera choisi dans le cadre du projet.
+Il faut également se questionner sur la question de la terminaison de la ligne.
+
+\section{Vendredi 17 mars 2023}
+
+Dans le cadre de ce projet, une marge de 10\% pour les imprévus serait suffisante au lieu des 20\% initialement proposés.
+La difficulté principale du projet résidera dans la réalisation du chargeur de démarrage. Une des approches envisagées pour le projet est de commencer par réaliser l'interface utilisateur souhaitée.
+Cela permettra de déterminer les étapes à suivre et les résultats à atteindre.
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=python]
+        >>> import royal as r
+        >>> r.discover()
+        Found 2 buses: 
+          - I2C /dev/bus/smbus-1
+          - CAN /dev/...
+        Found 3 devices:
+          - /i2c/0/123 as color_sensor_left
+            - Bootloader version 1.23
+            - Architecture ARM Cortex M0+ 
+            - Firmware abe17438738321
+            - Firmware source http://github.com/
+        >>> c = r.connect('color_sensor_left')
+        ColorSensor instance
+        >>> c.check_version('1.^')
+        True
+        >>> c.version
+        1.23
+        >>> c.color
+        blue
+        >>> c.turn_on_led()
+        >>> c.
+    \end{lstlisting}
+    \caption{Exemple de résultat final}
+\end{listing}
+
+\section{Vendredi 31 mars 2023}
+
+En termes de compatibilité, il serait souhaitable d'être compatible avec un maximum de microcontrôleurs.
+Pour ce faire, un graphique en camembert pourrait être réalisé pour présenter les microcontrôleurs les plus utilisés, en privilégiant ceux basés sur l'architecture ARM.
+De plus, un autre graphique en camembert pourrait être créé pour représenter les différents constructeurs de microcontrôleurs.
+Enfin, un dernier graphique en camembert pourrait être élaboré pour illustrer l'utilisation des langages de programmation les plus courants sur les microcontrôleurs, tels que le C, le C++ et Rust.
+
+Il convient également de prendre en considération les microcontrôleurs tels que AT SAM(T), ATmega et MSP430 pour évaluer leur compatibilité avec le projet.
+En ce qui concerne les boitiers, il a été noté que le SO(ic)8 est trop volumineux, le (T)SSOP n'est pas intéressant, le QFN est intéressant, le TQFP est également intéressant, tandis que le BGA n'est pas soudable à la \gls{heig}.
+
+Concernant le langage de programmation, il est courant que les microcontrôleurs soient codés en C.
+Il serait également utile de vérifier la possibilité d'utiliser du C++ et d'explorer la piste du Rust, tout en gardant en tête qu'il ne faut pas s'engager directement dans cette voie.
+
+\section{Vendredi 12 mai 2023}
+
+Il est nécessaire de remplir la cause de non-confidentialité et de l'envoyer comme prévu.
+
+Le journal de travail n'est pas obligatoire, mais il est toujours recommandé de le tenir avec rigueur. Faire un journal de travail incomplet n'apportera pas les bénéfices escomptés.
+
+Il est important de vérifier la date de rendu du travail de bachelor et d'envoyer la date de fin pour validation.
+
+Dans le rapport, il faudra inclure un bilan sur les avantages et les désavantages des frameworks utilisés.
+
+Concernant les connecteurs, il serait pertinent de se renseigner sur les MOLEX CLIK-Mate. Ce sont de bons connecteurs, mais il convient de vérifier s'ils ne sont pas trop gros pour le cadre de ce projet.
+
+Envisager la mise en place d'un chien de garde (\textit{watchdog}) pourrait être une option intéressante.
+
+\section{Vendredi 26 mai 2023}
+
+Pour déboguer le circuit imprimé qui sera réalisé, il est recommandé de se renseigner sur le Tag Connect et le SOICbite.
+
+Il est important de noter que la commande Linux i2cdetect peut réagir différemment pour différentes adresses I2C en raison de l'alternance entre l'écriture et la lecture selon les adresses I2C.
+
+Concernant le déploiement du nouveau micrologiciel, une approche intéressante pourrait être d'envoyer l'adresse de destination, la taille du bloc et les données.
+
+Voici un aperçu de ce qui pourrait être fait lorsque l'utilisateur cherche à lister les périphériques I2C compatibles avec l'écosystème.
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+        $ ./jordil-master lookup
+        #  uuid               i2c  firm   group ontology        name
+        1. 0x123456789abcdef0 0x22 v1.1.2 1     sensor/light    Capteur couleur gauche
+        2. 0x2a2a2a2a2a2a2a2a 0x43 v2.3.1 2     actuator/servo  Servo bras droit
+        $ ./i2cdetect
+        $ ./jordil-master upgrade --group2 http://git... 
+        ----------> 100%
+        OK
+        
+        
+        git clone robot
+        cd robot
+        make all
+        make deploy
+    \end{lstlisting}
+    \caption{Exemple de recherche de périphériques I2C compatibles avec l'écosystème}
+\end{listing}
+
+\section{Vendredi 2 juin 2023}
+
+La taille du circuit imprimé devrait être d'environ 2.7 cm. Pour la commande, un circuit imprimé de catégorie 6C avec de préférence deux couches, mais quatre couches sont également acceptables.
+
+Une autre carte Nucleo est disponible avec un microcontrôleur plus proche de celui choisi, mais elle ne semble pas nécessairement plus appropriée que celle actuellement utilisée, à moins qu'une raison valable ne soit avancée.
+
+La date de rendu intermédiaire est prévue après environ 150 heures de travail, soit le 21 juin 2023.
+
+\section{Mercredi 21 juin 2023}
+
+Le rendu du rapport intermédiaire doit être effectué dans l'après-midi.
+Le circuit imprimé doit également être passé en revue par Monsieur Yves Chevallier.

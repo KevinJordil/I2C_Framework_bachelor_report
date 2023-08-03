@@ -1,13 +1,13 @@
 Dans ce chapitre, l'objectif est d'expliquer les choix effectués pour la réalisation d'un démonstrateur fonctionnel mettant en évidence la partie matérielle de ce projet.
 Le démonstrateur se présente sous la forme d'un circuit imprimé intégrant le microcontrôleur sélectionné.
 
-Ce démonstrateur a été conçu en tenant compte de son utilisation potentielle lors des prochaines éditions du concours Eurobot, auquel participe le club de robotique de la \gls{heigvd}.
+Ce démonstrateur a été conçu en tenant compte de son utilisation potentielle lors des prochaines éditions du concours Eurobot, auquel participe le club de robotique de la \gls{heig}.
 
 \section{Fonctionnalités}
 
 L'objectif de ce démonstrateur est de mettre en évidence les fonctionnalités de l'écosystème I2C de ce projet.
 Pour cela, un circuit imprimé a été conçu, intégrant le microcontrôleur choisi, un capteur de couleur et une LED.
-Ce démonstrateur permet de démontrer toutes les fonctionnalités et peut être utilisé au sein du club de robotique de la \gls{heigvd} lors des prochaines éditions du concours Eurobot.
+Ce démonstrateur permet de démontrer toutes les fonctionnalités et peut être utilisé au sein du club de robotique de la \gls{heig} lors des prochaines éditions du concours Eurobot.
 
 \section{Tension electrique}
 
@@ -72,7 +72,7 @@ Cependant, il est important de noter que le connecteur n'est pas un élément es
 
 \section{Circuit imprimé}
 
-La conception du circuit imprimé a été confiée à l'\gls{iai} de la \gls{heigvd}, afin de maintenir une conception interne offrant une flexibilité pour les modifications ultérieures.
+La conception du circuit imprimé a été confiée à l'\gls{iai} de la \gls{heig}, afin de maintenir une conception interne offrant une flexibilité pour les modifications ultérieures.
 Monsieur Luca Romano est la personne responsable de la conception et de la réalisation de la carte au sein de l'\gls{iai}. Cette approche vise également à maintenir une cohérence avec les autres projets de l'institut.
 Le logiciel Altium Designer a été utilisé pour concevoir le circuit imprimé, en veillant à ce qu'il soit aussi compact que possible tout en facilitant la ba.
 Le circuit a été commandé chez Eurocircuit, et la brasure des composants a été réalisée par l'institut d'automatisation industrielle.
@@ -124,7 +124,14 @@ Par conséquent, il est nécessaire de mettre en place un système qui permet d'
 Ce système doit être facile à activer ou désactiver, sachant que le changement de configuration se fera rarement.
 Si possible, un système simple à braser serait préférable pour faciliter la mise en place de cette fonctionnalité.
 
-\todo{Expliquer le choix fait sur les resistance pull up sur le circuit imprimé}
+Il a été décidé de mettre en place des pads qui permettent de réaliser un pont de soudure.
+Lorsque le pont est établi, la résistance de pull-up est activée.
+L'avantage de ce système réside dans le fait qu'il ne nécessite aucun composant matériel supplémentaire.
+De plus, le coût de ce pont de soudure est réduit.
+Dans un système donné, le dernier périphérique peut varier, mais cela se produit rarement.
+Par conséquent, le pont de soudure répond parfaitement à cette exigence et offre une solution simple et efficace pour activer les résistances de pull-up lorsque cela est nécessaire.
+
+\todo{Photo}
 
 \section{Carte d'extension}
 
