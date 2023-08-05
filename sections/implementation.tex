@@ -1,8 +1,6 @@
 Dans ce chapitre, l'objectif est de fournir une explication détaillée de l'implémentation de chaque composant du projet, en mettant en évidence les choix techniques qui ont été faits.
 Cela permet de donner une vue d'ensemble du projet et d'expliquer les raisons pour lesquelles chaque partie a été mise en place de cette manière spécifique.
 
-\todo{hash firmware}
-
 \section{Matériel}
 
 Pour la mise en place et les tests de ce projet, plusieurs composants matériels sont nécessaires.
@@ -18,8 +16,6 @@ STMicroelectronics fournit une gamme de cartes Nucleo équipées de microcontrô
 La carte NUCLEO-G071RB possède un microcontrôleur STM32 très similaire à celui sélectionné pour ce projet, ce qui la rend idéale pour les tests.
 De plus, elle est équipée d'un connecteur ST-Link qui permet de programmer le microcontrôleur directement depuis un ordinateur via USB.
 Étant donné que c'est une carte de développement, il est facile de connecter des éléments au microcontrôleur via les GPIO.
-
-\todo{Parler de la nouvelle carte et dire pourquoi avoir acheter la nouvelle}
 
 \begin{figure}[H]
     \centering
@@ -176,6 +172,10 @@ Par conséquent, il est préférable d'adapter la taille réservée pour les mé
 
 Grâce à cette méthode, il est possible de stocker des données liées à une carte qui peuvent être modifiées à la fois par le chargeur de démarrage et par le micrologiciel, tout en maintenant leur intégrité même après une mise à jour complète du micrologiciel.
 
+C'est également dans cette zone mémoire que l'information de mise à jour est stockée.
+Lorsqu'une mise à jour doit être installée, l'application modifie une métadonnée dans cette zone mémoire.
+Ainsi, le chargeur de démarrage peut détecter qu'une mise à jour est nécessaire et éviter de démarrer sur le micrologiciel actuel.
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1.3]{./assets/figures/metadata.pdf}
@@ -251,22 +251,36 @@ Une fois que tous les morceaux ont été envoyés avec succès, le script indiqu
 
 Pour réaliser correctement la mise à jour, l'utilisateur doit entrer indiquer plusieurs paramètres. Voici un aperçu de l'aide proposée :
 
-\todo{Texte de l'aide}
-
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
-      $ wget http://tex.stackexchange.com
+Usage: i2c_update_firmware.py [OPTIONS]
+
+  Program to update the firmware of a microcontroller belonging to the I2C
+  ecosystem
+
+Options:
+  -b, --bus INTEGER    The I2C bus number to be used.
+  -f, --firmware TEXT  The path to the firmware file to be sent.
+  -a, --address TEXT   The address of the I2C slave to be updated as hex
+                       (0x--).
+
+  -r, --restart        Restart the firmware to go into bootloader mode for
+                       update.
+
+  -g, --group INTEGER  The group of the device to be updated.
+  -t, --type TEXT      The type of sensors of the device to be updated.
+  --help               Show this message and exit.
     \end{lstlisting}
     \caption{Mise à jour du micrologiciel - Texte d'aide}
 \end{listing}
 
 Voici un exemple d'affichage du terminal après une mise à jour du micrologiciel
 
-\todo{Texte de mise à jour}
-
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
-      $ wget http://tex.stackexchange.com
+Restarting firmware
+Upload firmware  [####################################]  100%
+Firmware sent successfully
     \end{lstlisting}
     \caption{Mise à jour du micrologiciel - Résultat}
 \end{listing}
@@ -282,21 +296,28 @@ Ainsi, l'utilisateur peut facilement et rapidement obtenir la liste de tous les 
 
 Pour analyser le bus, un seul paramètre est necessaire, le numéro du bus. Voici un aperçu de l'aide proposée :
 
-\todo{Texte de l'aide}
-
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
-      $ wget http://tex.stackexchange.com
+Usage: i2c_detect.py [OPTIONS]
+
+  Program to detect all I2C devices belonging to the I2C ecosystem
+
+Options:
+  -b, --bus INTEGER  The I2C bus number to be used.
+  --help             Show this message and exit.
     \end{lstlisting}
     \caption{Analyse du bus - Texte d'aide}
 \end{listing}
 
 Voici un exemple d'affichage du terminal après une analyse de bus
 
-\todo{Texte de l'aide}
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
-      $ wget http://tex.stackexchange.com
+-------------------------------------------------------------------------
+#    UUID       I2C    Firmware     Group   Type           Name
+-------------------------------------------------------------------------
+1.   0x370072   0x19   0x8383c862   7       sensor/color   front sensor
+2.   0x390072   0x5c   0xad5a21e7   7       sensor/color   back sensor
     \end{lstlisting}
     \caption{Analyse du bus - Résultat}
 \end{listing}
@@ -317,11 +338,18 @@ Le nom et le type sont des champs texte, tandis que le groupe du périphérique 
 Pour mettre à jour l'un de ces paramètres, il est nécessaire de spécifier plusieurs informations.
 Voici un aperçu des paramètres à remplir pour mettre à jour une métadonnée.
 
-\todo{Texte de l'aide}
-
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
-      $ wget http://tex.stackexchange.com
+Usage: i2c_set_field.py [OPTIONS]
+
+Options:
+  -b, --bus INTEGER              The I2C bus number to be used.
+  -a, --address TEXT             The address of the I2C slave to be updated as
+                                 hex (0x--).
+
+  -f, --field [group|type|name]  The field to be set.
+  -v, --value TEXT               The value to be set.
+  --help                         Show this message and exit.
     \end{lstlisting}
     \caption{Modification des métadonnées - Texte d'aide}
 \end{listing}
@@ -348,4 +376,30 @@ Il suffit de créer un objet de type \textit{DigitalIn} en spécifiant le pin du
 Ensuite, il suffit de lire la valeur de cet objet comme s'il s'agissait d'une variable numérique.
 Cette approche facilite l'observation des signaux et permet de détecter les erreurs potentielles sur le bus I2C.
 
-\todo{Auto-adressage}
+\section{Empreinte de la version du micrologiciel}
+
+Il est essentiel de pouvoir différencier les versions de micrologiciel présentes sur le système.
+Une première solution consiste à attribuer manuellement un numéro de version à chaque changement.
+Cependant, cette approche comporte le risque d'oubli, ce qui pourrait entraîner deux micrologiciels différents portant le même numéro de version.
+C'est pourquoi il est préférable d'utiliser une fonction de hashage pour générer un numéro de version unique à chaque fois que le code source est compilé.
+
+Le \textit{framework} Mbed fournit des valeurs qui peuvent être calculées automatiquement par rapport à l'image générée.
+Parmi les valeurs disponibles, il y a des fonctions de hashage de type \textit{SHA-2}. \textit{SHA-2} est une famille de fonctions de hashage développée par la \gls{nsa}, comprenant plusieurs variantes telles que \textit{SHA-256}, \textit{SHA-512}, \textit{SHA-224} et \textit{SHA-384}.
+Mbed propose les versions \textit{SHA-256} et \textit{SHA-512}.
+Dans le cadre du projet, l'objectif n'est pas de protéger le contenu original, mais plutôt d'obtenir une clé différente à chaque génération.
+La version \textit{SHA-256} en 256 bits est suffisante pour éviter les collisions entre les quelques micrologiciels qui seront présents sur le bus I2C.
+Par la suite, l'affichage de la clé peut se faire en 32 caractères hexadécimaux.
+
+\section{Auto-adressage}
+
+L'adresse I2C des composants est déterminée en utilisant l'identifiant unique du microcontrôleur choisi, qui a une taille de 96 bits selon la documentation.
+Cependant, cette taille n'est pas pratique car elle ne peut pas être stockée dans une seule variable de type numérique.
+Par conséquent, l'identifiant unique est tronqué à 32 bits, ce qui signifie qu'il n'est plus forcément unique.
+Néanmoins, cela n'a pas une grande importance pour la suite de la génération d'adresse, car un calcul de modulo est effectué sur cet identifiant unique, et cela peut générer des doublons.
+
+Une fois que l'identifiant unique est récupéré à l'adresse mémoire spécifiée dans la documentation, il suffit de procéder au calcul de génération d'adresse.
+Ensuite, un temps d'attente aléatoire est généré à partir de l'identifiant unique sur 32 bits.
+L'application attend ensuite ce temps généré pour vérifier que l'adresse I2C est bien disponible.
+Si ce n'est pas le cas, l'adresse est incrémentée et le processus recommence sans attente.
+
+Grâce à ces calculs simples, il est possible de générer une adresse différente pour chaque périphérique ayant le même micrologiciel.

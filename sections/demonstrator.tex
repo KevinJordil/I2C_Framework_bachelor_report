@@ -27,8 +27,24 @@ La solidité du connecteur est primordiale afin de garantir une connexion fiable
 
 Le connecteur sélectionné doit comporter quatre broches pour l'I2C, comprenant l'alimentation du circuit imprimé (3,3V et GND) ainsi que les broches pour l'I2C (SDA et SCL).
 
-Dans le cadre de ce projet, deux connecteurs ont été analysés.
-Le connecteur QWIIC de Sparkfun, largement utilisé pour les périphériques I2C, et le connecteur Micro MaTch de TE Connectivity.
+Dans le cadre de ce projet, trois connecteurs ont été analysés.
+Le connecteur QWIIC de Sparkfun, largement utilisé pour les périphériques I2C, le connecteur CLIK-Mate de Molex et le connecteur Micro MaTch de TE Connectivity.
+
+\subsection{CLIK-Mate}
+
+Le connecteur CLICK-Mate, conçu par la compagnie Molex, présente l'avantage d'une grande robustesse.
+Cependant, il est relativement volumineux pour un connecteur à quatre broches, ce qui peut poser un défi lorsqu'un connecteur compact est nécessaire.
+En effet, les dimensions du connecteur sur le circuit imprimé sont de 6,85 mm de hauteur, 7,45 mm de longueur et 12 mm de largeur.
+
+Assembler le connecteur sur un câble sans les pinces Molex appropriées peut être compliqué, rendant l'opération difficile à réaliser soi-même. Ces pinces Molex ont également un certain coût.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.085]{./assets/figures/clik_mate.jpg}
+    \caption{\cite{clikmate} Connecteur CLIK-Mate}
+\end{figure}
+
+En résumé, bien que le connecteur CLICK-Mate soit robuste, il est jugé trop grand et peu pratique à assembler.
 
 \subsection{QWIIC}
 
@@ -125,13 +141,23 @@ Ce système doit être facile à activer ou désactiver, sachant que le changeme
 Si possible, un système simple à braser serait préférable pour faciliter la mise en place de cette fonctionnalité.
 
 Il a été décidé de mettre en place des pads qui permettent de réaliser un pont de soudure.
-Lorsque le pont est établi, la résistance de pull-up est activée.
+Lorsque le pont est établi, la résistance de \textit{pull-up} est activée.
 L'avantage de ce système réside dans le fait qu'il ne nécessite aucun composant matériel supplémentaire.
 De plus, le coût de ce pont de soudure est réduit.
 Dans un système donné, le dernier périphérique peut varier, mais cela se produit rarement.
-Par conséquent, le pont de soudure répond parfaitement à cette exigence et offre une solution simple et efficace pour activer les résistances de pull-up lorsque cela est nécessaire.
+Par conséquent, le pont de soudure répond parfaitement à cette exigence et offre une solution simple et efficace pour activer les résistances de \textit{pull-up} lorsque cela est nécessaire.
 
-\todo{Photo}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.08]{./assets/figures/resistance_desactive.jpg}
+    \caption{Résistances \textit{pull-up} non activées}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.1]{./assets/figures/resistance_active.jpg}
+    \caption{Résistances \textit{pull-up} activées}
+\end{figure}
 
 \section{Carte d'extension}
 

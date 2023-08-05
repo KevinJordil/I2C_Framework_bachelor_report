@@ -13,9 +13,9 @@ Lorsqu'un test est effectué sur un microcontrôleur, il fait référence au mic
         \caption{Tests : Génération du micrologiciel\label{tab:generationmicrologiciel}}
         \begin{tabularx}{\textwidth}{l|X|c}
             Description                & Résultat attendu                                                                               & Status    \\ \hline
-            Compiler un micrologiciel. & L'entête est enrichie avec le nombre magique.                                                           & \checkmark \\
-            Compiler un micrologiciel. & L'entête est dotée de la taille du micrologiciel, générée automatiquement.                   & \checkmark \\
-            Compiler un micrologiciel. & L'entête est complétée par le \gls{crc} du micrologiciel, généré automatiquement.                & \checkmark \\
+            Compiler un micrologiciel. & L'entête inclut le nombre magique.                                                           & \checkmark \\
+            Compiler un micrologiciel. & L'entête inclut la taille du micrologiciel, générée automatiquement.                   & \checkmark \\
+            Compiler un micrologiciel. & L'entête inclut le \gls{crc} du micrologiciel, généré automatiquement.                & \checkmark \\
             Compiler un micrologiciel. & L'entête inclut le \textit{hash} de version du micrologiciel, généré automatiquement. & \checkmark
         \end{tabularx}
     \end{center}
@@ -99,3 +99,16 @@ Pour réaliser ces tests, il est nécessaire de connecter la sonde avec le conne
         \end{tabularx}
     \end{center}
 \end{table}
+
+\subsection{Gestion des erreurs}
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Tests : Gestion des erreurs\label{tab:gestionerreurs}}
+        \begin{tabularx}{\textwidth}{X|X|c}
+            Description                & Résultat attendu                                                                               & Status    \\ \hline
+            Mettre le signal SCL à l'état bas pendant plus de cinq secondes. & Les périphériques compatibles avec l'écosystème redémarrent. & \checkmark
+        \end{tabularx}
+    \end{center}
+\end{table}
+

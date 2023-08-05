@@ -1,7 +1,84 @@
-\todo{CI/CD}
+Dans ce chapitre, l'objectif est d'examiner les aspects qui pourraient être améliorés dans le projet.
+Il est courant de constater qu'il y a toujours des possibilités d'amélioration pour fournir un service encore plus satisfaisant.
+Cependant, il est important de garder à l'esprit que le temps est limité et qu'un cahier des charges a été défini.
+Malgré cela, il est tout de même intéressant de mettre en avant les points qui pourraient bénéficier d'améliorations futures.
 
-\todo{Interruptions}
+\section{CI/CD}
 
-\todo{carte bouton GPIO}
+L'intégration continue (CI) et le déploiement continu (CD) font partie des tâches potentielles du cahier des charges, si le temps le permet.
+Ces pratiques pourraient être mises en place pour améliorer la rapidité du processus de développement.
 
-\todo{carte connecteur pas compatible doit casser}
+Dans le cadre du club de robotique, l'utilisation de CI/CD pourrait être bénéfique.
+Les informaticiens pourraient mettre à jour facilement le micrologiciel de certains composants en mettant à jour le code sur \textit{Github}.
+Une fois que le fichier binaire du micrologiciel est généré, un signal pourrait être envoyé au maître I2C pour l'informer de la disponibilité de la mise à jour.
+Cependant, certaines contraintes doivent être prises en compte.
+
+Premièrement, le maître I2C doit avoir une connexion internet pour récupérer le fichier binaire généré par \textit{Github}.
+Si l'accès à internet n'est pas disponible dans l'écosystème embarqué, le système CI/CD perdrait son utilité, et \textit{Github} serait simplement utilisé pour générer le fichier binaire.
+Cette contrainte est importante à considérer dans le cadre d'un projet visant la réutilisation.
+
+Deuxièmement, il est nécessaire de pouvoir identifier les périphériques à mettre à jour.
+Lorsque le code d'un certain composant ou type de composant est mis à jour, il est logique de mettre à jour uniquement les périphériques concernés.
+Cela implique la mise en place d'un CI/CD capable de différencier les périphériques en fonction des informations du dépôt \textit{Github}.
+Bien que cela soit possible, la mise en place peut être complexe si des groupes de composants doivent être différenciés en cours de projet. Il serait probablement possible de spécifier à quel groupe, type ou adresse de périphérique il est nécessaire de déployer le nouveau micrologiciel.
+Ainsi, lors de la récupération du fichier par le maître, celui-ci saurait comment déployer le micrologiciel.
+
+En conclusion, l'utilisation de CI/CD peut être très utile dans certains contextes, mais elle n'est pas applicable dans d'autres en raison de la nécessité d'une connexion internet.
+Il est donc essentiel d'évaluer attentivement les contraintes et besoins spécifiques avant de mettre en place cette amélioration.
+
+\section{Interruption I2C}
+
+Actuellement, le micrologiciel est configuré pour surveiller en permanence toute communication I2C qui lui est adressée, fonctionnant ainsi dans une boucle continue sans entrer en veille.
+Bien que cela fonctionne parfaitement, il serait préférable d'utiliser une interruption lorsque l'adresse I2C correspond à celle du périphérique.
+Cette approche permettrait de mettre en veille le périphérique et de le réveiller uniquement lorsqu'une communication le concerne.
+
+Le \textit{framework} Mbed ne propose pas directement la possibilité d'activer et d'utiliser les interruptions.
+Cependant, il donne accès aux registres du microcontrôleur, permettant ainsi d'activer manuellement les interruptions, y compris celles de l'I2C.
+Au cours de ce projet, plusieurs tentatives d'utilisation de cette interruption ont été effectuées.
+Le déclenchement s'effectuait correctement les deux premières fois, mais ensuite le bus I2C se bloquait.
+La raison de ce blocage n'a pas été identifiée.
+Il ne s'agissait probablement pas d'un problème d'acquittement, car dans ce cas, le deuxième déclenchement ne se produirait pas.
+Une analyse plus approfondie serait nécessaire pour comprendre le problème.
+
+Lorsqu'une interruption I2C est mise en place, il est important de ne pas effectuer le traitement directement à l'intérieur de l'interruption.
+Cela est une mauvaise pratique, car d'autres interruptions pourraient être bloquées.
+Une approche plus appropriée consisterait à démarrer un thread lors de l'interruption, qui se chargerait de traiter toutes les opérations I2C nécessaires.
+Cette approche permettrait de quitter rapidement l'interruption I2C tout en effectuant des traitements plus complexes en parallèle.
+Mbed offre une gestion simplifiée des threads, ce qui rend cette mise en œuvre réalisable.
+
+De plus, le microcontrôleur choisi possède une fonctionnalité intéressante.
+Sur le bus I2C 1, il est possible de réveiller le microcontrôleur. Si le microcontrôleur est en veille et qu'une connexion I2C démarre, il peut sortir de veille automatiquement.
+Cette possibilité permet de minimiser la consommation d'énergie tout en restant actif au moment opportun, ce qui est particulièrement intéressant pour un système embarqué.
+
+\section{Option de redémarrage}
+
+Dans les outils dédiés au maître I2C, un utilitaire existe pour mettre à jour le micrologiciel.
+Une des options de ce script permet de spécifier l'état actuel du microcontrôleur, déterminant s'il se trouve dans le chargeur de démarrage ou dans l'application.
+En cas de spécification incorrecte, la mise à jour ne fonctionnera pas correctement lorsque le microcontrôleur est en mode application, ou cela entraînera simplement une légère perte de temps s'il est mal spécifié pour le chargeur de démarrage.
+
+Pour améliorer cela, il serait envisageable de réaliser une lecture sur l'appareil pour déterminer son état actuel.
+Un nombre magique serait alors défini pour chaque état, permettant de redémarrer le microcontrôleur de manière appropriée pour être certain d'accéder au chargeur de démarrage et effectuer la mise à jour si nécessaire.
+De cette manière, l'utilisateur n'aurait plus à se demander dans quel état se trouve le microcontrôleur actuellement.
+Bien que cette amélioration ne soit pas indispensable, elle améliorerait l'expérience utilisateur.
+
+\section{Bouton de mise à jour}
+
+Une amélioration potentielle consisterait à remplacer le bouton actuel par un bouton qui serait connecté à une broche du microcontrôleur. Ainsi, lors du démarrage du microcontrôleur, le chargeur de démarrage pourrait vérifier si le bouton est enfoncé ou non.
+Dans le cas où le bouton est pressé, le chargeur de démarrage pourrait attendre une mise à jour du micrologiciel.
+Cela permettrait de mettre à jour le microcontrôleur même si un utilisateur a téléversé un code qui empêche de revenir au mode de mise à jour.
+En conséquence, le débogueur ne serait utilisé qu'une seule fois dans la vie du périphérique.
+
+Actuellement, cette amélioration n'est pas réalisable car le bouton existant sur le microcontrôleur est connecté à la broche de réinitialisation.
+Lorsqu'il est enfoncé, cela redémarre le microcontrôleur de la même manière que lorsqu'il est allumé normalement.
+Ce bouton est pratique lorsque l'on souhaite redémarrer rapidement un module, mais il ne permet pas de réaliser la fonctionnalité envisagée pour la mise à jour du micrologiciel.
+
+\section{Connecteur non compatible}
+
+Le circuit imprimé développé est équipé d'un connecteur doté de renforts sur les côtés.
+Lors du choix de cette version du connecteur, l'idée était d'améliorer la solidité du connecteur.
+Cependant, cette version du connecteur n'est plus entièrement compatible.
+En effet, une petite partie doit être cassée pour pouvoir effectuer la connexion.
+Cela n'affecte pas le fonctionnement, mais cela peut être déroutant pour l'utilisateur.
+Deux solutions sont envisageables : adapter le connecteur sur le circuit imprimé ou adapter le connecteur au bout du câble.
+Il serait plus approprié d'opter pour l'adaptation du connecteur sur le circuit imprimé afin de choisir la version sans renforts, qui est compatible.
+

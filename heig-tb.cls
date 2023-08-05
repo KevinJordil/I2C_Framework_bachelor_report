@@ -153,7 +153,7 @@
 
 \DeclareOption{ie}{
   \def\@orientation{Systèmes informatiques embarqués}
-  \def\@department{TIC}
+  \def\@department{Technologies de l'information et de la communication}
   \def\@faculty{Informatique et systèmes de communication}
   \def\@field{Ingénierie}
 }
