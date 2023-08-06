@@ -1,24 +1,24 @@
 Les codes sources du projet sont disponibles pour une utilisation future par le club de robotique ou pour d'autres projets au sein de l'école.
 Ils ont été rendus accessibles au public via une organisation Github.
 L'ensemble des ressources techniques du projet peut être trouvé à l'adresse suivante : \url{https://github.com/I2C-Framework}.
-Cette organisation se compose de quatre principaux dépôts importants, contenant des informations essentielles pour comprendre et utiliser l'écosystème développé dans le cadre de ce projet.
-
-\section{Micrologiciel}
-
-Le dépôt \textit{slave_basic_firmware} contient le micrologiciel de base, intégrant toute la gestion de l'écosystème.
-Pour adapter ce micrologiciel, il suffit de créer une copie de ce dépôt en effectuant un \textit{fork}.
-Ensuite, il est possible d'adapter le fichier principal pour créer une nouvelle application.
-Des fonctions sont disponibles pour générer des réponses sur le bus de l'écosystème avec ses propres numéros de registres et ses fonctions de retour.
+Cette organisation se compose de quatre dépôts principaux, contenant des informations essentielles pour comprendre et utiliser l'écosystème développé dans le cadre de ce projet.
 
 \section{Chargeur de démarrage}
 
-Le dépôt \textit{slave_bootloader} contient le chargeur de démarrage, qui permet de recevoir les mises à jour via le bus I2C tout en vérifiant l'intégrité de la transmission.
+Le dépôt \textit{slave\_bootloader} contient le chargeur de démarrage, qui permet de recevoir les mises à jour via le bus I2C tout en vérifiant l'intégrité de la transmission.
 Normalement, ce code n'a pas besoin d'être modifié pour être utilisé dans d'autres projets.
 Cependant, il sera nécessaire de l'adapter si le microcontrôleur choisi diffère de celui utilisé dans ce projet.
 Dans ce cas, les adresses mémoires devront être ajustées en conséquence.
 
+\section{Micrologiciel}
+
+Le dépôt \textit{slave\_basic\_firmware} contient le micrologiciel de base, intégrant toute la gestion de l'écosystème.
+Pour adapter ce micrologiciel, il suffit de créer une copie de ce dépôt en effectuant un \textit{fork}.
+Ensuite, il est possible d'adapter le fichier principal pour créer une nouvelle application.
+Des fonctions sont disponibles pour générer des réponses sur le bus de l'écosystème avec ses propres numéros de registres et ses fonctions de retour.
+
 \section{Outils du maître I2C}
 
-Le dépôt \textit{master_tools} contient les scripts Python destinés au maître du bus de communication I2C.
+Le dépôt \textit{master\_tools} contient les scripts Python destinés au maître du bus de communication I2C.
 Ils permettent d'interagir pleinement avec l'écosystème.
 Les scripts n'ont pas besoin d'être modifiés pour fonctionner avec l'écosystème actuel ou pour une utilisation future.

@@ -165,7 +165,7 @@ Il convient d'appliquer les filtres suivants :
     \item Boîtier fournisseur: Inférieur ou égal à (4x4)
 \end{itemize}
 
-Le choix d'un cœur ARM Cortex-M assure une architecture ARM solide, idéale pour les systèmes embarqués.
+Le choix d'un c\oe{}ur ARM Cortex-M assure une architecture ARM solide, idéale pour les systèmes embarqués.
 En ce qui concerne la taille du boîtier, une dimension égale ou inférieure à 4x4mm garantit la compacité du microcontrôleur.
 
 Cependant, il y a un critère qui ne peut pas être pris en compte lors de l'application des filtres, c'est la définition du nombre de bus I2C.
@@ -178,7 +178,7 @@ En analysant ces résultats, il est remarqué qu'il y a une présence significat
 Cette famille est étendue, ce qui en fait un choix privilégié.
 Après avoir examiné les datasheets, deux microcontrôleurs répondent aux exigences du projet : le STM32G031G6U6 et le STM32G071GBU6.
 La principale différence entre les deux réside dans la quantité de mémoire flash et de RAM.
-Dans ce projet, l'objectif est d'utiliser un \textit{\gls{framework}} avec un chargeur de démarrage et un micrologiciel.
+Dans ce projet, l'objectif est d'utiliser un chargeur de démarrage et un micrologiciel.
 Par conséquent, il est préférable de choisir le STM32G071GBU6 qui offre une plus grande capacité de mémoire flash et de RAM.
 Cela évitera de rencontrer des problèmes de mémoire lorsque des fonctionnalités supplémentaires seront ajoutées ultérieurement dans le projet.
 
@@ -249,12 +249,11 @@ Dans un souci de portabilité, l'interface sera implémentée en Python, un lang
 \subsection{Découverte des périphériques}
 
 Dans Linux, il existe un outil appelé \texttt{i2cdetect} qui permet de détecter tous les périphériques connectés sur le bus I2C.
-Cet outil est issu du package \texttt{i2cdetect}.
+Cet outil est issu du package \texttt{i2ctools}.
 Cependant, il y a une subtilité à prendre en compte.
 Par défaut, le programme effectue une lecture ou une écriture en fonction de l'adresse détectée.
 Cette particularité est due au fait que certains microcontrôleurs, tels que les microcontrôleurs Atmel AT24RF08, se corrompent lorsqu'une écriture est effectuée.
 À l'inverse, certains microcontrôleurs, notamment les microcontrôleurs d'horloge, ne répondent pas à une lecture, car ils sont en mode écriture seule.
-Ainsi, lors d'une écriture, cela bloque le bus I2C.
 Pour éviter ce problème, l'outil \texttt{i2cdetect} effectue des lectures ou des écritures en fonction de plages d'adresses connues correspondant aux composants problématiques.
 Dans le cas de ce projet, il n'y a pas de composants posant problème, ce qui permet d'uniformiser le comportement en n'effectuant que des lectures.
 Cela peut être réalisé en utilisant l'option \texttt{-r} de l'outil.

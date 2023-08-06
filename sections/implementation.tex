@@ -71,7 +71,7 @@ Cette approche évite le besoin de stocker les deux micrologiciels simultanémen
 
 Chaque méthode présente ses avantages et ses inconvénients.
 La première méthode permet une mise à jour plus facile et rapide à partir de l'application, mais elle nécessite une mémoire plus importante.
-La deuxième méthode nécessite une fonctionnalité de mise à jour dans le bootloader, mais elle peut être utilisée même si la mémoire disponible est limitée.
+La deuxième méthode nécessite une fonctionnalité de mise à jour dans le chargeur de démarrage, mais elle peut être utilisée même si la mémoire disponible est limitée.
 
 \subsection{Envoi du micrologiciel}
 
@@ -252,7 +252,7 @@ Une fois que tous les morceaux ont été envoyés avec succès, le script indiqu
 Pour réaliser correctement la mise à jour, l'utilisateur doit entrer indiquer plusieurs paramètres. Voici un aperçu de l'aide proposée :
 
 \begin{listing}[!h]
-    \begin{lstlisting}[language=bash]
+    \begin{lstlisting}
 Usage: i2c_update_firmware.py [OPTIONS]
 
   Program to update the firmware of a microcontroller belonging to the I2C
@@ -261,11 +261,9 @@ Usage: i2c_update_firmware.py [OPTIONS]
 Options:
   -b, --bus INTEGER    The I2C bus number to be used.
   -f, --firmware TEXT  The path to the firmware file to be sent.
-  -a, --address TEXT   The address of the I2C slave to be updated as hex
-                       (0x--).
+  -a, --address TEXT   The address of the I2C slave to be updated as hex (0x--).
 
-  -r, --restart        Restart the firmware to go into bootloader mode for
-                       update.
+  -r, --restart        Restart the firmware to go into bootloader mode for update.
 
   -g, --group INTEGER  The group of the device to be updated.
   -t, --type TEXT      The type of sensors of the device to be updated.
@@ -383,7 +381,7 @@ Une première solution consiste à attribuer manuellement un numéro de version 
 Cependant, cette approche comporte le risque d'oubli, ce qui pourrait entraîner deux micrologiciels différents portant le même numéro de version.
 C'est pourquoi il est préférable d'utiliser une fonction de hashage pour générer un numéro de version unique à chaque fois que le code source est compilé.
 
-Le \textit{framework} Mbed fournit des valeurs qui peuvent être calculées automatiquement par rapport à l'image générée.
+Le \textit{\gls{framework}} Mbed fournit des valeurs qui peuvent être calculées automatiquement par rapport à l'image générée.
 Parmi les valeurs disponibles, il y a des fonctions de hashage de type \textit{SHA-2}. \textit{SHA-2} est une famille de fonctions de hashage développée par la \gls{nsa}, comprenant plusieurs variantes telles que \textit{SHA-256}, \textit{SHA-512}, \textit{SHA-224} et \textit{SHA-384}.
 Mbed propose les versions \textit{SHA-256} et \textit{SHA-512}.
 Dans le cadre du projet, l'objectif n'est pas de protéger le contenu original, mais plutôt d'obtenir une clé différente à chaque génération.

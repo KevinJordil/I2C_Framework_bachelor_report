@@ -32,7 +32,7 @@ Actuellement, le micrologiciel est configuré pour surveiller en permanence tout
 Bien que cela fonctionne parfaitement, il serait préférable d'utiliser une interruption lorsque l'adresse I2C correspond à celle du périphérique.
 Cette approche permettrait de mettre en veille le périphérique et de le réveiller uniquement lorsqu'une communication le concerne.
 
-Le \textit{framework} Mbed ne propose pas directement la possibilité d'activer et d'utiliser les interruptions.
+Le \textit{\gls{framework}} Mbed ne propose pas directement la possibilité d'activer et d'utiliser les interruptions.
 Cependant, il donne accès aux registres du microcontrôleur, permettant ainsi d'activer manuellement les interruptions, y compris celles de l'I2C.
 Au cours de ce projet, plusieurs tentatives d'utilisation de cette interruption ont été effectuées.
 Le déclenchement s'effectuait correctement les deux premières fois, mais ensuite le bus I2C se bloquait.
