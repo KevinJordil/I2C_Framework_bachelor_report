@@ -237,52 +237,6 @@ Grâce à ces indications simples à remplir, il est possible de créer une inte
 Dans cette sous-section, l'objectif consiste à expliquer l'implémentation de chaque partie de l'interface POSIX.
 Cela permet de comprendre les choix effectués et d'adapter l'interface POSIX en fonction des besoins spécifiques.
 
-\subsubsection{Mise à jour du micrologiciel}
-
-Pour mettre à jour le micrologiciel, deux états sont possibles.
-Le premier état correspond au microcontrôleur étant dans l'application, tandis que le deuxième état indique que le microcontrôleur est dans le chargeur de démarrage, prêt à recevoir une mise à jour du micrologiciel.
-Dans le premier cas, l'objectif est d'atteindre le deuxième état, permettant ainsi d'effectuer la mise à jour du micrologiciel.
-Pour cela, l'utilisateur doit indiquer, via un paramètre du script Python, si le redémarrage du microcontrôleur est nécessaire.
-
-Une fois que le microcontrôleur est dans le chargeur de démarrage, il est prêt à recevoir le nouveau micrologiciel.
-Le script Python découpe alors le fichier binaire du nouveau micrologiciel en morceaux, puis les envoie un à un via le bus \gls{i2c} pour réaliser la mise à jour.
-
-Une fois que tous les morceaux ont été envoyés avec succès, le script indique que l'envoi de la mise à jour s'est effectué correctement.
-
-Pour réaliser correctement la mise à jour, l'utilisateur doit entrer indiquer plusieurs paramètres. Voici un aperçu de l'aide proposée :
-
-\begin{listing}[!h]
-    \begin{lstlisting}
-Usage: i2c_update_firmware.py [OPTIONS]
-
-  Program to update the firmware of a microcontroller belonging to the I2C
-  ecosystem
-
-Options:
-  -b, --bus INTEGER    The I2C bus number to be used.
-  -f, --firmware TEXT  The path to the firmware file to be sent.
-  -a, --address TEXT   The address of the I2C slave to be updated as hex (0x--).
-
-  -r, --restart        Restart the firmware to go into bootloader mode for update.
-
-  -g, --group INTEGER  The group of the device to be updated.
-  -t, --type TEXT      The type of sensors of the device to be updated.
-  --help               Show this message and exit.
-    \end{lstlisting}
-    \caption{Mise à jour du micrologiciel - Texte d'aide}
-\end{listing}
-
-Voici un exemple d'affichage du terminal après une mise à jour du micrologiciel
-
-\begin{listing}[!h]
-    \begin{lstlisting}[language=bash]
-Restarting firmware
-Upload firmware  [####################################]  100%
-Firmware sent successfully
-    \end{lstlisting}
-    \caption{Mise à jour du micrologiciel - Résultat}
-\end{listing}
-
 \subsubsection{Analyse du bus}
 
 Pour détecter tous les périphériques \gls{i2c} compatibles avec l'écosystème créé dans ce projet, le script effectue une lecture sur chaque adresse possible sur le bus.
@@ -320,6 +274,49 @@ Voici un exemple d'affichage du terminal après une analyse de bus
     \caption{Analyse du bus - Résultat}
 \end{listing}
 
+\subsubsection{Mise à jour du micrologiciel}
+
+Pour mettre à jour le micrologiciel, deux états sont possibles.
+Le premier état correspond au microcontrôleur étant dans l'application, tandis que le deuxième état indique que le microcontrôleur est dans le chargeur de démarrage, prêt à recevoir une mise à jour du micrologiciel.
+Dans le premier cas, l'objectif est d'atteindre le deuxième état, permettant ainsi d'effectuer la mise à jour du micrologiciel.
+Pour cela, l'utilisateur doit indiquer, via un paramètre du script Python, si le redémarrage du microcontrôleur est nécessaire.
+
+Une fois que le microcontrôleur est dans le chargeur de démarrage, il est prêt à recevoir le nouveau micrologiciel.
+Le script Python découpe alors le fichier binaire du nouveau micrologiciel en morceaux, puis les envoie un à un via le bus \gls{i2c} pour réaliser la mise à jour.
+
+Une fois que tous les morceaux ont été envoyés avec succès, le script indique que l'envoi de la mise à jour s'est effectué correctement.
+
+Pour réaliser correctement la mise à jour, l'utilisateur doit entrer indiquer plusieurs paramètres. Voici un aperçu de l'aide proposée :
+
+\begin{listing}[!h]
+    \begin{lstlisting}
+Usage: i2c_update_firmware.py [OPTIONS]
+
+  Program to update the firmware of a microcontroller belonging to the I2C
+  ecosystem
+
+Options:
+  -b, --bus INTEGER    The I2C bus number to be used.
+  -f, --firmware TEXT  The path to the firmware file to be sent.
+  -a, --address TEXT   The address of the I2C slave to be updated as hex (0x--).
+  -r, --restart        Restart the firmware to go into bootloader mode for update.
+  -g, --group INTEGER  The group of the device to be updated.
+  -t, --type TEXT      The type of sensors of the device to be updated.
+  --help               Show this message and exit.
+    \end{lstlisting}
+    \caption{Mise à jour du micrologiciel - Texte d'aide}
+\end{listing}
+
+Voici un exemple d'affichage du terminal après une mise à jour du micrologiciel
+
+\begin{listing}[!h]
+    \begin{lstlisting}[language=bash]
+Restarting firmware
+Upload firmware  [####################################]  100%
+Firmware sent successfully
+    \end{lstlisting}
+    \caption{Mise à jour du micrologiciel - Résultat}
+\end{listing}
 
 \subsubsection{Modification des métadonnées}
 
@@ -342,9 +339,7 @@ Usage: i2c_set_field.py [OPTIONS]
 
 Options:
   -b, --bus INTEGER              The I2C bus number to be used.
-  -a, --address TEXT             The address of the I2C slave to be updated as
-                                 hex (0x--).
-
+  -a, --address TEXT             The address of the I2C slave to be updated as hex (0x--).
   -f, --field [group|type|name]  The field to be set.
   -v, --value TEXT               The value to be set.
   --help                         Show this message and exit.
