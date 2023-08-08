@@ -5,7 +5,7 @@ Cette organisation se compose de quatre dépôts principaux, contenant des infor
 
 \section{Chargeur de démarrage}
 
-Le dépôt \textit{slave\_bootloader} contient le chargeur de démarrage, qui permet de recevoir les mises à jour via le bus I2C tout en vérifiant l'intégrité de la transmission.
+Le dépôt \textit{slave\_bootloader} contient le chargeur de démarrage, qui permet de recevoir les mises à jour via le bus \gls{i2c} tout en vérifiant l'intégrité de la transmission.
 Normalement, ce code n'a pas besoin d'être modifié pour être utilisé dans d'autres projets.
 Cependant, il sera nécessaire de l'adapter si le microcontrôleur choisi diffère de celui utilisé dans ce projet.
 Dans ce cas, les adresses mémoires devront être ajustées en conséquence.
@@ -19,6 +19,6 @@ Des fonctions sont disponibles pour générer des réponses sur le bus de l'éco
 
 \section{Outils du maître I2C}
 
-Le dépôt \textit{master\_tools} contient les scripts Python destinés au maître du bus de communication I2C.
+Le dépôt \textit{master\_tools} contient les scripts Python destinés au maître du bus de communication \gls{i2c}.
 Ils permettent d'interagir pleinement avec l'écosystème.
 Les scripts n'ont pas besoin d'être modifiés pour fonctionner avec l'écosystème actuel ou pour une utilisation future.

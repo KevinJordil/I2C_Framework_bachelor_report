@@ -1,31 +1,31 @@
 Dans le domaine des systèmes embarqués, l'utilisation de modules indépendants à microcontrôleurs est souvent nécessaire pour répartir les tâches et renforcer la modularité et la robustesse des systèmes.
 Cependant, la communication entre ces modules représente un défi majeur.
-C'est là qu'intervient le bus I2C, un protocole de communication simple et efficace permettant de connecter plusieurs modules à un seul bus.
+C'est là qu'intervient le bus \gls{i2c}, un protocole de communication simple et efficace permettant de connecter plusieurs modules à un seul bus.
 
-Malgré les avantages du bus I2C, il présente certaines limitations.
+Malgré les avantages du bus \gls{i2c}, il présente certaines limitations.
 Par exemple, il ne dispose pas d'une couche de gestion d'adresse, ce qui rend la maintenance complexe lorsque plusieurs micrologiciels sont nécessaires pour faire fonctionner l'écosystème.
 De plus, la gestion des mises à jour des modules et la gestion des erreurs de communication posent également des problèmes.
 
-C'est dans ce contexte que ce projet vise à développer un \textit{\gls{framework}} innovant pour la gestion d'un écosystème décentralisé sur un bus I2C.
+C'est dans ce contexte que ce projet vise à développer un \textit{\gls{framework}} innovant pour la gestion d'un écosystème décentralisé sur un bus \gls{i2c}.
 L'objectif principal est de créer une solution qui permette de gérer les adresses des modules, d'assurer les communications entre ces derniers, ainsi que de faciliter le déploiement automatique de nouveaux micrologiciels sur les modules et la gestion des mises à jour.
 
 Pour atteindre ces objectifs, ce projet se déroulera en plusieurs étapes.
-Tout d'abord, une sélection sera effectuée pour choisir un microcontrôleur compact disposant des périphériques courants et programmable en langage C/C++.
+Tout d'abord, une sélection sera effectuée pour choisir un microcontrôleur compact disposant des périphériques courants et programmables en langage C/C++.
 De préférence, ce microcontrôleur sera compatible avec le \textit{\gls{framework}} mbed et basé sur une architecture ARM, comme Cortex-M0+ ou Cortex-M4.
 
-Ensuite, un bootloader sera développé ou utilisé, tel que u-boot, pour permettre le déploiement automatique des nouveaux micrologiciels sur les modules via le bus de communication.
-Ce bootloader devra être compatible avec le \textit{\gls{framework}} mbed, et la gestion des versions firmware se fera à l'aide d'un hash.
+Ensuite, un chargeur de démarrage sera développé ou utilisé, tel que u-boot, pour permettre le déploiement automatique des nouveaux micrologiciels sur les modules via le bus de communication.
+Ce chargeur de démarrage devra être compatible avec le \textit{\gls{framework}} mbed, et la gestion des versions firmware se fera à l'aide d'un hash.
 
-À l'issue de ce travail, plusieurs tâches clés seront accomplies, notamment le développement d'un écosystème I2C pour les microcontrôleurs, la sélection d'un \textit{\gls{framework}} de développement adapté, le choix d'un microcontrôleur approprié, l'implémentation d'un système d'auto-adressage des éléments du bus, ainsi que la création d'un bootloader permettant la mise à jour automatique des micrologiciels embarqués.
+À l'issue de ce travail, plusieurs tâches clés seront accomplies, notamment le développement d'un écosystème \gls{i2c} pour les microcontrôleurs, la sélection d'un \textit{\gls{framework}} de développement adapté, le choix d'un microcontrôleur approprié, l'implémentation d'un système d'auto-adressage des éléments du bus, ainsi que la création d'un chargeur de démarrage permettant la mise à jour automatique des micrologiciels embarqués.
 De plus, une interface POSIX sera développée pour faciliter l'interaction avec les éléments du bus.
 Un démonstrateur du système sera réalisé, mettant en évidence toutes les fonctionnalités mentionnées précédemment.
 Le code source de ce projet sera livré sous GitHub, accompagné d'une documentation adéquate.
 
-En résumé, ce projet vise à développer un \textit{\gls{framework}} novateur pour la gestion d'un écosystème décentralisé sur le bus I2C, en apportant des solutions aux problèmes de gestion d'adresses, de communication, de déploiement de micrologiciels et de maintenance.
+En résumé, ce projet vise à développer un \textit{\gls{framework}} novateur pour la gestion d'un écosystème décentralisé sur le bus \gls{i2c}, en apportant des solutions aux problèmes de gestion d'adresses, de communication, de déploiement de micrologiciels et de maintenance.
 L'objectif final est de faciliter la mise en place et la gestion de systèmes embarqués modulaires et robustes, tout en offrant une flexibilité et une fiabilité accrues.
 
 \section{Contexte}
-Le club de robotique de l'\gls{heig} participe au concours international de robotique amateur, Eurobot.
+Le club de robotique de la \gls{heig} participe au concours international de robotique amateur, Eurobot.
 Ce concours met en compétition des équipes de jeunes, qu'elles soient constituées d'étudiants ou de clubs indépendants.
 Au fil des années, il est apparu que la gestion des capteurs présents sur les robots était un besoin essentiel.
 En effet, chaque année, les robots doivent être adaptés aux nouvelles contraintes du concours.

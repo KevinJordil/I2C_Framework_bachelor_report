@@ -5,10 +5,10 @@ Cela permet de donner une vue d'ensemble du projet et d'expliquer les raisons po
 
 Pour la mise en place et les tests de ce projet, plusieurs composants matériels sont nécessaires.
 
-Tout d'abord, il est nécessaire d'avoir une unité qui agit comme le maître I2C.
+Tout d'abord, il est nécessaire d'avoir une unité qui agit comme le maître \gls{i2c}.
 Dans ce cas, un Raspberry Pi modèle 3 a été utilisé.
 Il est possible d'utiliser une autre carte, à condition qu'elle permette d'installer un système d'exploitation capable d'exécuter du code Python.
-De plus, il est important d'avoir une connexion I2C disponible.
+De plus, il est important d'avoir une connexion \gls{i2c} disponible.
 Dans ce projet, le Raspberry Pi est équipé de Raspbian.
 
 Ensuite, des cartes de développement sont nécessaires pour tester rapidement le code.
@@ -23,12 +23,12 @@ De plus, elle est équipée d'un connecteur ST-Link qui permet de programmer le 
     \caption{\cite{nucleo} Carte Nucleo}
 \end{figure}
 
-En cas de problème sur le bus I2C, un analyseur logique peut être utile pour observer ce qui se passe.
+En cas de problème sur le bus \gls{i2c}, un analyseur logique peut être utile pour observer ce qui se passe.
 Dans ce projet, un Saleae Logic 8 a été utilisé.
 Cet analyseur logique est pratique pour diagnostiquer les problèmes de communication.
 Il permet souvent d'identifier quel composant pose problème et de cibler plus rapidement la source du dysfonctionnement.
 
-En résumé, avec un Raspberry Pi, plusieurs cartes Nucleo servant d'esclaves I2C, il est possible de tester l'intégralité du projet.
+En résumé, avec un Raspberry Pi, plusieurs cartes Nucleo servant d'esclaves \gls{i2c}, il est possible de tester l'intégralité du projet.
 
 \section{Logiciels}
 
@@ -56,10 +56,10 @@ Il a permis de gagner du temps en facilitant le processus de débogage.
 
 \section{Mise à jour du micrologiciel}
 
-Dans cette section, le processus de mise à jour du micrologiciel via le bus I2C sera expliqué en détail.
+Dans cette section, le processus de mise à jour du micrologiciel via le bus \gls{i2c} sera expliqué en détail.
 Les deux méthodes possibles pour effectuer la mise à jour seront présentées, en mettant en avant leurs avantages et leurs inconvénients respectifs.
 
-Il existe deux approches pour la mise à jour du micrologiciel via le bus I2C.
+Il existe deux approches pour la mise à jour du micrologiciel via le bus \gls{i2c}.
 La première méthode consiste à télécharger le nouveau micrologiciel à partir de l'application exécutée par le microcontrôleur.
 Cela nécessite que le microcontrôleur dispose d'une quantité suffisante de mémoire pour stocker les deux micrologiciels.
 Ainsi au redémarrage, le chargeur de démarrage remplace l'ancien micrologiciel par le nouveau.
@@ -79,12 +79,12 @@ L'envoi du micrologiciel se fait par morceaux étant donné que la mémoire vive
 Les données du micrologiciel sont stockées dans un tampon déclaré dans le code, qui lui est stocké dans la mémoire vive.
 
 La mémoire vive du microcontrôleur choisi a une capacité de 36 kilo-octets.
-La taille d'un micrologiciel avec Mbed, incluant une simple réponse I2C, est d'environ 30 kilo-octets.
+La taille d'un micrologiciel avec Mbed, incluant une simple réponse \gls{i2c}, est d'environ 30 kilo-octets.
 L'ajout de fonctionnalités supplémentaires augmentera la taille du micrologiciel.
 
 La taille des morceaux a été fixée à 1024 octets. Cette valeur a été sélectionnée pour sa facilité de représentation en termes du nombre de morceaux qui seront envoyés pour le micrologiciel.
 De plus, cette taille s'adapte parfaitement à la mémoire vive, même en cas d'utilisation intensive.
-Il s'agit d'une taille pertinente qui permet d'optimiser le temps d'envoi en termes du nombre de morceaux, tout en minimisant le temps d'écriture sur la mémoire flash entre deux communications I2C.
+Il s'agit d'une taille pertinente qui permet d'optimiser le temps d'envoi en termes du nombre de morceaux, tout en minimisant le temps d'écriture sur la mémoire flash entre deux communications \gls{i2c}.
 
 \subsection{Detection d'un micrologiciel valide}
 
@@ -107,13 +107,13 @@ Grâce à ces vérifications, il est assuré que le micrologiciel est valide et 
 \subsection{Mise à jour par l'application}
 
 Dans cette solution, l'utilisateur envoie les données du nouveau micrologiciel directement à l'application s'exécutant sur le microcontrôleur.
-L'application reçoit un morceau de données via le bus I2C et l'écrit dans une zone mémoire réservée au nouveau micrologiciel dans la mémoire flash.
+L'application reçoit un morceau de données via le bus \gls{i2c} et l'écrit dans une zone mémoire réservée au nouveau micrologiciel dans la mémoire flash.
 Une fois toutes les données du micrologiciel reçues, le microcontrôleur redémarre.
 Le chargeur de démarrage doit détecter la présence d'un nouveau micrologiciel dans la zone mémoire réservée.
 S'il détecte un micrologiciel valide, il peut le copier à la place de l'ancien micrologiciel.
 Une vérification est ensuite effectuée pour s'assurer que la copie s'est déroulée correctement.
 
-Pour implémenter cette solution, lors de la communication I2C entre le maître et le microcontrôleur, un numéro de registre doit être spécifié.
+Pour implémenter cette solution, lors de la communication \gls{i2c} entre le maître et le microcontrôleur, un numéro de registre doit être spécifié.
 Ce numéro indique à l'application qu'il s'agit d'un message de mise à jour du micrologiciel.
 Étant donné que le nouveau micrologiciel est divisé en morceaux, il est nécessaire d'envoyer à la fois le numéro du morceau et le nombre total de morceaux.
 Ainsi, l'application peut placer correctement les données dans la mémoire flash.
@@ -127,7 +127,7 @@ Ainsi, l'application peut placer correctement les données dans la mémoire flas
 \subsection{Mise à jour par le chargeur de démarrage}
 
 Dans cette solution, la responsabilité de la mise à jour du micrologiciel repose sur le chargeur de démarrage.
-Lorsque l'application du microcontrôleur reçoit l'indication de mettre à jour le micrologiciel via I2C, elle redémarre pour permettre au chargeur de démarrage de prendre le relais.
+Lorsque l'application du microcontrôleur reçoit l'indication de mettre à jour le micrologiciel via \gls{i2c}, elle redémarre pour permettre au chargeur de démarrage de prendre le relais.
 Cependant, il est nécessaire d'informer le chargeur de démarrage d'attendre une mise à jour et de ne pas démarrer sur le micrologiciel actuel.
 Pour ce faire, le chargeur de démarrage s'arrête et attend une mise à jour dans certaines conditions :
 
@@ -137,10 +137,10 @@ Pour ce faire, le chargeur de démarrage s'arrête et attend une mise à jour da
     \item L'application ne présente pas le bon \gls{crc}.
 \end{itemize}
 
-L'application peut se qualifiée de "sujette à mise à jour".
+L'application peut se qualifier de "sujette à mise à jour".
 En conséquence, le chargeur de démarrage peut être programmé pour attendre une mise à jour tant que le nombre magique et le \gls{crc} sont corrects.
 
-Une fois que le chargeur de démarrage sait qu'il doit attendre une mise à jour, il reste en attente de la mise à jour via le bus I2C.
+Une fois que le chargeur de démarrage sait qu'il doit attendre une mise à jour, il reste en attente de la mise à jour via le bus \gls{i2c}.
 Une fois que le nouveau micrologiciel est reçu et vérifié, le chargeur de démarrage démarre avec le nouveau micrologiciel.
 Le système de mise à jour a été influencé par la référence \cite{reindl2020software}.
 
@@ -151,7 +151,7 @@ Le système de mise à jour a été influencé par la référence \cite{reindl20
 \end{figure}
 
 L'avantage de cette solution réside dans la possibilité de mettre à jour le micrologiciel même si l'application est corrompue ou si elle ne gère pas correctement le redémarrage vers le chargeur de démarrage.
-Toutefois, la gestion du bus I2C peut être effectuée par le chargeur de démarrage ou par le micrologiciel.
+Toutefois, la gestion du bus \gls{i2c} peut être effectuée par le chargeur de démarrage ou par le micrologiciel.
 
 \subsection{Stockage des métadonnées}
 
@@ -188,9 +188,9 @@ Dans cette section, la mise en \oe{}uvre de l'interface POSIX sera détaillée. 
 
 \subsection{Environnement}
 
-Dans ce projet, aucun environnement matériel final n'est défini. L'objectif consiste à créer un écosystème sur le bus I2C qui peut être réutilisé par d'autres projets. Par conséquent, une interface doit être développée pour être utilisée avec la plupart des maîtres I2C.
+Dans ce projet, aucun environnement matériel final n'est défini. L'objectif consiste à créer un écosystème sur le bus \gls{i2c} qui peut être réutilisé par d'autres projets. Par conséquent, une interface doit être développée pour être utilisée avec la plupart des maîtres \gls{i2c}.
 
-Il existe deux types de maîtres I2C possibles. Un maître équipé d'un système d'exploitation, généralement Linux, et un maître sans système d'exploitation, généralement un microcontrôleur. Il convient toutefois de noter qu'une fonctionnalité importante de l'interface POSIX est le déploiement de nouveaux micrologiciels. Par conséquent, le maître I2C doit être capable de mettre à jour, puis de compiler et finalement d'envoyer le micrologiciel.
+Il existe deux types de maîtres \gls{i2c} possibles. Un maître équipé d'un système d'exploitation, généralement Linux, et un maître sans système d'exploitation, généralement un microcontrôleur. Il convient toutefois de noter qu'une fonctionnalité importante de l'interface POSIX est le déploiement de nouveaux micrologiciels. Par conséquent, le maître \gls{i2c} doit être capable de mettre à jour, puis de compiler et finalement d'envoyer le micrologiciel.
 
 \subsection{Choix du langage}
 
@@ -245,7 +245,7 @@ Dans le premier cas, l'objectif est d'atteindre le deuxième état, permettant a
 Pour cela, l'utilisateur doit indiquer, via un paramètre du script Python, si le redémarrage du microcontrôleur est nécessaire.
 
 Une fois que le microcontrôleur est dans le chargeur de démarrage, il est prêt à recevoir le nouveau micrologiciel.
-Le script Python découpe alors le fichier binaire du nouveau micrologiciel en morceaux, puis les envoie un à un via le bus I2C pour réaliser la mise à jour.
+Le script Python découpe alors le fichier binaire du nouveau micrologiciel en morceaux, puis les envoie un à un via le bus \gls{i2c} pour réaliser la mise à jour.
 
 Une fois que tous les morceaux ont été envoyés avec succès, le script indique que l'envoi de la mise à jour s'est effectué correctement.
 
@@ -285,14 +285,14 @@ Firmware sent successfully
 
 \subsubsection{Analyse du bus}
 
-Pour détecter tous les périphériques I2C compatibles avec l'écosystème créé dans ce projet, le script effectue une lecture sur chaque adresse possible sur le bus.
+Pour détecter tous les périphériques \gls{i2c} compatibles avec l'écosystème créé dans ce projet, le script effectue une lecture sur chaque adresse possible sur le bus.
 Si un périphérique répond, la réponse est comparée au nombre magique défini.
 Si le nombre magique correspond, cela indique que le périphérique fait partie de l'écosystème.
 Dans ce cas, les détails de ce périphérique sont récupérés en effectuant une série de communications.
 Une fois que toutes les adresses ont été parcourues, la liste des périphériques avec leurs détails est affichée sur le terminal.
-Ainsi, l'utilisateur peut facilement et rapidement obtenir la liste de tous les composants du bus compatibles avec leur détails.
+Ainsi, l'utilisateur peut facilement et rapidement obtenir la liste de tous les composants du bus compatibles avec leurs détails.
 
-Pour analyser le bus, un seul paramètre est necessaire, le numéro du bus. Voici un aperçu de l'aide proposée :
+Pour analyser le bus, un seul paramètre est nécessaire, le numéro du bus. Voici un aperçu de l'aide proposée :
 
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
@@ -354,10 +354,10 @@ Options:
 
 \section{Gestion des erreurs}
 
-Dans le cadre de ce projet, il est pertinent de mettre en place une gestion des erreurs pour améliorer la résolution des problèmes qui peuvent survenir sur le bus I2C.
-La solution choisie consiste à observer les signaux de l'I2C, à savoir SDA et SCL.
-Le signal de l'horloge (SCL) est géré par le maître du bus I2C. Lorsqu'il est en repos, il est à l'état logique 1.
-Ainsi, une attente prolongée à l'état logique 0 sur SCL peut indiquer qu'un esclave I2C ne répond pas comme prévu, alors que le maître attend une réponse.
+Dans le cadre de ce projet, il est pertinent de mettre en place une gestion des erreurs pour améliorer la résolution des problèmes qui peuvent survenir sur le bus \gls{i2c}.
+La solution choisie consiste à observer les signaux de l'\gls{i2c}, à savoir SDA et SCL.
+Le signal de l'horloge (SCL) est géré par le maître du bus \gls{i2c}. Lorsqu'il est en repos, il est à l'état logique 1.
+Ainsi, une attente prolongée à l'état logique 0 sur SCL peut indiquer qu'un esclave \gls{i2c} ne répond pas comme prévu, alors que le maître attend une réponse.
 En surveillant l'état du signal SCL et en s'assurant qu'il ne reste pas bloqué pendant trop longtemps, il est possible de détecter d'éventuelles erreurs de communication.
 
 Pour cette tâche, un chien de garde ou \textit{watchdog}, en anglais, est mis en place.
@@ -372,32 +372,32 @@ Cependant, il est intéressant de pouvoir récupérer un bus de communication fo
 L'analyse d'un signal avec \textit{Mbed} est simple à mettre en place.
 Il suffit de créer un objet de type \textit{DigitalIn} en spécifiant le pin du microcontrôleur.
 Ensuite, il suffit de lire la valeur de cet objet comme s'il s'agissait d'une variable numérique.
-Cette approche facilite l'observation des signaux et permet de détecter les erreurs potentielles sur le bus I2C.
+Cette approche facilite l'observation des signaux et permet de détecter les erreurs potentielles sur le bus \gls{i2c}.
 
 \section{Empreinte de la version du micrologiciel}
 
 Il est essentiel de pouvoir différencier les versions de micrologiciel présentes sur le système.
 Une première solution consiste à attribuer manuellement un numéro de version à chaque changement.
 Cependant, cette approche comporte le risque d'oubli, ce qui pourrait entraîner deux micrologiciels différents portant le même numéro de version.
-C'est pourquoi il est préférable d'utiliser une fonction de hashage pour générer un numéro de version unique à chaque fois que le code source est compilé.
+C'est pourquoi il est préférable d'utiliser une fonction de hachage pour générer un numéro de version unique à chaque fois que le code source est compilé.
 
 Le \textit{\gls{framework}} Mbed fournit des valeurs qui peuvent être calculées automatiquement par rapport à l'image générée.
-Parmi les valeurs disponibles, il y a des fonctions de hashage de type \textit{SHA-2}. \textit{SHA-2} est une famille de fonctions de hashage développée par la \gls{nsa}, comprenant plusieurs variantes telles que \textit{SHA-256}, \textit{SHA-512}, \textit{SHA-224} et \textit{SHA-384}.
+Parmi les valeurs disponibles, il y a des fonctions de hachage de type \textit{SHA-2}. \textit{SHA-2} est une famille de fonctions de hachage développée par la \gls{nsa}, comprenant plusieurs variantes telles que \textit{SHA-256}, \textit{SHA-512}, \textit{SHA-224} et \textit{SHA-384}.
 Mbed propose les versions \textit{SHA-256} et \textit{SHA-512}.
 Dans le cadre du projet, l'objectif n'est pas de protéger le contenu original, mais plutôt d'obtenir une clé différente à chaque génération.
-La version \textit{SHA-256} en 256 bits est suffisante pour éviter les collisions entre les quelques micrologiciels qui seront présents sur le bus I2C.
+La version \textit{SHA-256} en 256 bits est suffisante pour éviter les collisions entre les quelques micrologiciels qui seront présents sur le bus \gls{i2c}.
 Par la suite, l'affichage de la clé peut se faire en 32 caractères hexadécimaux.
 
 \section{Auto-adressage}
 
-L'adresse I2C des composants est déterminée en utilisant l'identifiant unique du microcontrôleur choisi, qui a une taille de 96 bits selon la documentation.
+L'adresse \gls{i2c} des composants est déterminée en utilisant l'identifiant unique du microcontrôleur choisi, qui a une taille de 96 bits selon la documentation.
 Cependant, cette taille n'est pas pratique car elle ne peut pas être stockée dans une seule variable de type numérique.
 Par conséquent, l'identifiant unique est tronqué à 32 bits, ce qui signifie qu'il n'est plus forcément unique.
 Néanmoins, cela n'a pas une grande importance pour la suite de la génération d'adresse, car un calcul de modulo est effectué sur cet identifiant unique, et cela peut générer des doublons.
 
 Une fois que l'identifiant unique est récupéré à l'adresse mémoire spécifiée dans la documentation, il suffit de procéder au calcul de génération d'adresse.
 Ensuite, un temps d'attente aléatoire est généré à partir de l'identifiant unique sur 32 bits.
-L'application attend ensuite ce temps généré pour vérifier que l'adresse I2C est bien disponible.
+L'application attend ensuite ce temps généré pour vérifier que l'adresse \gls{i2c} est bien disponible.
 Si ce n'est pas le cas, l'adresse est incrémentée et le processus recommence sans attente.
 
 Grâce à ces calculs simples, il est possible de générer une adresse différente pour chaque périphérique ayant le même micrologiciel.

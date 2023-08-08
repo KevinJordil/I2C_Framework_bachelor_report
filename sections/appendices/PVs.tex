@@ -32,7 +32,7 @@ Les besoins du client sont les suivants :
     \item Assurer la pérennité du club de robotique en documentant le projet et en permettant sa réutilisation.
     \item Apporter un aspect technologique au sein du club de robotique, c'est-à-dire le projet en lui-même.
     \item Assurer un bon déroulement au sein du club de robotique.
-    \item Apporter une utilité pour les projets au \gls{reds} et à l'\gls{iai}, en ayant un projet au sens large.
+    \item Apporter une utilité pour les projets à l'\gls{reds} et à l'\gls{iai}, en ayant un projet au sens large.
 \end{itemize}
 
 \subsection{Technologie}
@@ -43,15 +43,15 @@ Il est intéressant d'explorer en profondeur la piste des Nucleo STM32 pour le p
 
 \subsection{Bus de communication}
 
-\subsubsection{I2C}
+\subsubsection{\gls{i2c}}
 
-Pour avoir un état haut lorsque le bus I2C est libre, une résistance de type \textit{pull-up} est utilisée.
-Si l'I2C est choisi, il sera nécessaire de mettre en place une gestion des erreurs.
+Pour avoir un état haut lorsque le bus \gls{i2c} est libre, une résistance de type \textit{pull-up} est utilisée.
+Si l'\gls{i2c} est choisi, il sera nécessaire de mettre en place une gestion des erreurs.
 Pour la résistance de type \textit{pull-up}, une solution possible est d'utiliser un microcontrôleur pour la génération.
 
 \subsubsection{CAN}
 
-Le bus CAN utilise deux transistors pour faire passer le signal, contrairement à l'I2C qui utilise une résistance de type \textit{pull-up}.
+Le bus CAN utilise deux transistors pour faire passer le signal, contrairement à l'\gls{i2c} qui utilise une résistance de type \textit{pull-up}.
 
 La plupart des microcontrôleurs ne possèdent pas de transceiver CAN intégré, ce qui nécessitera l'ajout d'un composant supplémentaire sur le circuit imprimé.
 Il existe peut-être quelques microcontrôleurs avec un transceiver intégré.
@@ -135,11 +135,11 @@ Envisager la mise en place d'un chien de garde (\textit{watchdog}) pourrait êtr
 
 Pour déboguer le circuit imprimé qui sera réalisé, il est recommandé de se renseigner sur le Tag Connect et le SOICbite.
 
-Il est important de noter que la commande Linux i2cdetect peut réagir différemment pour différentes adresses I2C en raison de l'alternance entre l'écriture et la lecture selon les adresses I2C.
+Il est important de noter que la commande Linux i2cdetect peut réagir différemment pour différentes adresses \gls{i2c} en raison de l'alternance entre l'écriture et la lecture selon les adresses \gls{i2c}.
 
 Concernant le déploiement du nouveau micrologiciel, une approche intéressante pourrait être d'envoyer l'adresse de destination, la taille du bloc et les données.
 
-Voici un aperçu de ce qui pourrait être fait lorsque l'utilisateur cherche à lister les périphériques I2C compatibles avec l'écosystème.
+Voici un aperçu de ce qui pourrait être fait lorsque l'utilisateur cherche à lister les périphériques \gls{i2c} compatibles avec l'écosystème.
 
 \begin{listing}[!h]
     \begin{lstlisting}[language=bash]
@@ -158,12 +158,12 @@ Voici un aperçu de ce qui pourrait être fait lorsque l'utilisateur cherche à 
         make all
         make deploy
     \end{lstlisting}
-    \caption{Exemple de recherche de périphériques I2C compatibles avec l'écosystème}
+    \caption{Exemple de recherche de périphériques \gls{i2c} compatibles avec l'écosystème}
 \end{listing}
 
 \section{Vendredi 2 juin 2023}
 
-La taille du circuit imprimé devrait être d'environ 2.7 cm. Pour la commande, un circuit imprimé de catégorie 6C avec de préférence deux couches, mais quatre couches sont également acceptables.
+La taille du circuit imprimé devrait être d'environ 2.7 cm. Pour la commande, un circuit imprimé de catégorie 6C avec de préférence deux couches, mais quatre couches est également acceptable.
 
 Une autre carte Nucleo est disponible avec un microcontrôleur plus proche de celui choisi, mais elle ne semble pas nécessairement plus appropriée que celle actuellement utilisée, à moins qu'une raison valable ne soit avancée.
 

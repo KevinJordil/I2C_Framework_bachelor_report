@@ -5,17 +5,17 @@ Ce démonstrateur a été conçu en tenant compte de son utilisation potentielle
 
 \section{Fonctionnalités}
 
-L'objectif de ce démonstrateur est de mettre en évidence les fonctionnalités de l'écosystème I2C de ce projet.
+L'objectif de ce démonstrateur est de mettre en évidence les fonctionnalités de l'écosystème \gls{i2c} de ce projet.
 Pour cela, un circuit imprimé a été conçu, intégrant le microcontrôleur choisi, un capteur de couleur et une LED.
 Ce démonstrateur permet de démontrer toutes les fonctionnalités et peut être utilisé au sein du club de robotique de la \gls{heig} lors des prochaines éditions du concours Eurobot.
 
-\section{Tension electrique}
+\section{Tension électrique}
 
-La tension électrique d'un périphérique sur le bus I2C n'est pas fixée selon une norme précise.
+La tension électrique d'un périphérique sur le bus \gls{i2c} n'est pas fixée selon une norme précise.
 Cependant, il est courant d'utiliser deux tensions électriques différentes : 3,3V et 5V.
 Dans le cadre de ce projet, il est préférable de choisir une tension compatible avec le microcontrôleur sélectionné.
 Selon la fiche technique du microcontrôleur, la tension d'alimentation recommandée est de 1,71V à 3,6V.
-Il est donc logique d'opter pour une tension de 3,3V pour le bus I2C.
+Il est donc logique d'opter pour une tension de 3,3V pour le bus \gls{i2c}.
 Cela permet de simplifier le circuit en évitant d'avoir plusieurs composants électroniques pour abaisser la tension du bus.
 
 \section{Connecteurs}
@@ -25,10 +25,10 @@ Il doit être à la fois compact et solide.
 La compacité est essentielle pour minimiser la taille du circuit imprimé, en accord avec l'aspect embarqué du projet.
 La solidité du connecteur est primordiale afin de garantir une connexion fiable, même en cas de branchement et débranchement fréquents.
 
-Le connecteur sélectionné doit comporter quatre broches, comprenant l'alimentation du circuit imprimé (3,3V et GND) ainsi que les broches pour l'I2C (SDA et SCL).
+Le connecteur sélectionné doit comporter quatre broches, comprenant l'alimentation du circuit imprimé (3,3V et GND) ainsi que les broches pour l'\gls{i2c} (SDA et SCL).
 
 Dans le cadre de ce projet, trois connecteurs ont été analysés.
-Le connecteur QWIIC de Sparkfun, largement utilisé pour les périphériques I2C, le connecteur CLIK-Mate de Molex et le connecteur Micro MaTch de TE Connectivity.
+Le connecteur QWIIC de Sparkfun, largement utilisé pour les périphériques \gls{i2c}, le connecteur CLIK-Mate de Molex et le connecteur Micro MaTch de TE Connectivity.
 
 \subsection{CLIK-Mate}
 
@@ -51,7 +51,7 @@ En résumé, bien que le connecteur CLICK-Mate soit robuste, il est jugé trop g
 Le connecteur QWIIC proposé par Sparkfun est compact.
 En effet, pour un connecteur à quatre broches, la partie s'intégrant au circuit imprimé mesure 2,95 mm de hauteur, 6,25 mm de longueur et 7 mm de largeur.
 Cependant, il peut être difficile de l'assembler soi-même sans l'outil approprié.
-Il est préférable d'acheter des câbles pré-confectionnés, mais cela limite la possibilité de réaliser des câbles sur mesure sans avoir besoin de connecteurs supplémentaires.
+Il est préférable d'acheter des câbles préconfectionnés, mais cela limite la possibilité de réaliser des câbles sur mesure sans avoir besoin de connecteurs supplémentaires.
 
 \begin{figure}[H]
     \centering
@@ -59,7 +59,7 @@ Il est préférable d'acheter des câbles pré-confectionnés, mais cela limite 
     \caption{\cite{qwiic} Connecteur QWIIC}
 \end{figure}
 
-En résumé, le connecteur QWIIC est compact mais peut être difficile à assembler sans l'outil approprié.
+En résumé, le connecteur QWIIC est compact, mais peut être difficile à assembler sans l'outil approprié.
 
 \subsection{Micro MaTch}
 
@@ -84,7 +84,7 @@ Il est préférable d'avoir un connecteur légèrement plus grand en échange d'
 L'avantage principal du connecteur Micro MaTch est la possibilité de l'assembler manuellement sans avoir besoin d'un équipement spécifique.
 La référence du connecteur Micro Match choisi est 338069-4.
 
-Cependant, il est important de noter que le connecteur n'est pas un élément essentiel. Il peut être remplacé par un autre connecteur existant pour s'adapter à d'autres projets. Un minimum de 4 broches est nécessaire pour l'alimentation et l'I2C.
+Cependant, il est important de noter que le connecteur n'est pas un élément essentiel. Il peut être remplacé par un autre connecteur existant pour s'adapter à d'autres projets. Un minimum de 4 broches est nécessaire pour l'alimentation et l'\gls{i2c}.
 
 \section{Circuit imprimé}
 
@@ -93,9 +93,21 @@ Monsieur Luca Romano est la personne responsable de la conception et de la réal
 Le logiciel Altium Designer a été utilisé pour concevoir le circuit imprimé, en veillant à ce qu'il soit aussi compact que possible tout en facilitant la brasure.
 Le circuit a été commandé chez Eurocircuit, et la brasure des composants a été réalisée par l'institut d'automatisation industrielle.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{./assets/figures/pcb_recto.png}
+    \caption{Visualisation en 3D de la face avant}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{./assets/figures/pcb_verso.png}
+    \caption{Visualisation en 3D de la face arrière}
+\end{figure}
+
 \section{Débogueur}
 
-Il est possible d'effectuer la mise à jour du nouveau micrologiciel du microcontrôleur via le bus I2C.
+Il est possible d'effectuer la mise à jour du nouveau micrologiciel du microcontrôleur via le bus \gls{i2c}.
 Cependant, pour assurer son fonctionnement, il est nécessaire que le chargeur de démarrage préalablement développé dans le projet soit déjà présent.
 Ainsi, il est nécessaire d'avoir un moyen d'implanter initialement le chargeur de démarrage sur le microcontrôleur.
 À cette fin, il est nécessaire d'avoir un connecteur sur le circuit imprimé permettant d'accéder aux broches de programmation.
@@ -132,11 +144,11 @@ Par conséquent, il est plus pratique de conserver le connecteur sur le circuit 
 
 \section{Resistance}
 
-Les équipements connectés à un bus I2C utilisent des sorties de type drain ouvert pour les deux lignes SDA et SCL.
+Les équipements connectés à un bus \gls{i2c} utilisent des sorties de type drain ouvert pour les deux lignes SDA et SCL.
 L'état logique \textit{0} ou \textit{LOW} est l'état dominant, tandis que l'état logique \textit{1} ou \textit{HIGH} est l'état récessif.
 Pour maintenir le bus à l'état de repos, des résistances de \textit{pull-up} sont utilisées pour le maintenir au niveau haut.
 
-Par conséquent, il est nécessaire de mettre en place un système qui permet d'activer des résistances de \textit{pull-up} sur le dernier périphérique I2C.
+Par conséquent, il est nécessaire de mettre en place un système qui permet d'activer des résistances de \textit{pull-up} sur le dernier périphérique \gls{i2c}.
 Ce système doit être facile à activer ou désactiver, sachant que le changement de configuration se fera rarement.
 Si possible, un système simple à braser serait préférable pour faciliter la mise en place de cette fonctionnalité.
 

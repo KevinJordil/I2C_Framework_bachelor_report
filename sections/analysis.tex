@@ -3,7 +3,7 @@ Cette analyse permettra ensuite de sélectionner les composants à utiliser pour
 
 \section{Bus de communication}
 
-Dans le cadre de ce projet, le bus de communication envisagé est l'I2C.
+Dans le cadre de ce projet, le bus de communication envisagé est l'\gls{i2c}.
 Cependant, il est pertinent de comparer ce bus avec d'autres protocoles de communication pour déterminer le plus adapté.
 Il existe une variété de bus de communication disponibles.
 Pour ce projet, il est nécessaire de choisir un protocole simple et compact, en accord avec les exigences des systèmes embarqués.
@@ -24,7 +24,7 @@ Afin de faciliter cette comparaison, un tableau comparatif des différents bus d
         \caption{Bus de communication \label{tab:buscommunication}}
         \begin{tabular}{c|c|c|c}
             Nom & \begin{tabular}[c]{@{}c@{}}Nombre maximal\\ de périphériques\end{tabular} & Vitesse standard & Fils de communication \\ \hline
-            I2C & 127                                                                       & 0.1 Mbit/s       & 2                     \\
+            \gls{i2c} & 127                                                                       & 0.1 Mbit/s       & 2                     \\
             CAN & Non défini                                                                & 1 Mbit/s         & 2                     \\
             LIN & 16                                                                        & 0.02 Mbit/s      & 1                     \\
             SPI & Non défini                                                                & 10 Mbit/s        & 4
@@ -52,11 +52,11 @@ Le bus CAN possède une vitesse intéressante par rapport aux autres bus de comm
 
 \subsection{I2C}
 
-Le bus I2C est vraiment adapté pour notre projet, car il ne présente pas de défauts majeurs par rapport à d'autres bus de communication.
-De plus, la plupart des composants I2C disponibles actuellement sur le marché prennent en charge le "fast mode" qui permet une vitesse de transfert allant jusqu'à 0.4 Mbit/s.
+Le bus \gls{i2c} est vraiment adapté pour notre projet, car il ne présente pas de défauts majeurs par rapport à d'autres bus de communication.
+De plus, la plupart des composants \gls{i2c} disponibles actuellement sur le marché prennent en charge le "fast mode" qui permet une vitesse de transfert allant jusqu'à 0.4 Mbit/s.
 
-Une autre caractéristique intéressante de l'I2C est son mode multimaître, qui peut être utile dans certaines situations.
-En résumé, l'I2C répond parfaitement à nos exigences pour ce projet, offrant une vitesse de transfert suffisante et la flexibilité nécessaire.
+Une autre caractéristique intéressante de l'\gls{i2c} est son mode multimaître, qui peut être utile dans certaines situations.
+En résumé, l'\gls{i2c} répond parfaitement à nos exigences pour ce projet, offrant une vitesse de transfert suffisante et la flexibilité nécessaire.
 
 \section{Microcontrôleur}
 
@@ -65,21 +65,21 @@ De plus, une évaluation des langages de programmation les plus couramment utili
 Il sera également nécessaire de choisir le boîtier le plus approprié pour le microcontrôleur sélectionné.
 Après ces analyses, d'autres critères devront être définis.
 Par exemple, il est spécifié dans le cahier des charges que le microcontrôleur doit être équipé d'un ARM Cortex.
-De plus, il est essentiel d'avoir les périphériques couramment utilisés tels que UART, SPI, I2C, GPIO, ADC et PWM.
+De plus, il est essentiel d'avoir les périphériques couramment utilisés tels que UART, SPI, \gls{i2c}, GPIO, ADC et PWM.
 Ces critères devront être pris en compte lors du choix final du microcontrôleur.
 
 \subsection{Fabricants}
 
 Dans le domaine des microcontrôleurs, il existe plusieurs fabricants présents sur le marché.
 Cependant, il est pertinent de se concentrer sur les fabricants qui détiennent une part de marché significative.
-En se limitant à ces fabricants, on s'assure d'avoir accès à une documentation complète et à un approvisionnement adéquat en termes de disponibilité des composants.
+Cette approche garantit un accès à une documentation exhaustive ainsi qu'à un approvisionnement adéquat, en termes de disponibilité des composants.
 Les données de \href{https://www.statista.com/statistics/1327509/top-mcu-suppliers-worldwide/}{Statista.com} fournissent un aperçu des parts de marché des fabricants de microcontrôleurs en 2021.
 Voici un graphique présentant ces données.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=12cm]{./assets/figures/topmcu.py.eps}
-    \caption{Part de marché des fabriquants de microcontrôleurs en 2021 }
+    \caption{Part de marché des fabricants de microcontrôleurs en 2021 }
     \label{fig:topmcu}
 \end{figure}
 
@@ -92,7 +92,7 @@ Chacun des fabricants mentionnés ci-dessus propose des microcontrôleurs basés
 Différents langages de programmation sont utilisés pour programmer des microcontrôleurs, mais certains sont plus répandus que d'autres.
 Le langage de programmation C est largement utilisé et constitue le choix prédominant lorsqu'il s'agit de trouver du code pour les microcontrôleurs.
 Dans certains cas, l'assembleur est également utilisé, notamment pour des applications spécifiques.
-On trouve également des projets qui utilisent le C++, le Rust et le Python, bien que leur utilisation soit moins répandue.
+Des projets utilisent également des langages tels que le C++, le Rust et le Python, bien que leur usage soit moins courant.
 La première option courante consiste donc à utiliser le langage C.
 Cependant, il est intéressant d'explorer les autres langages de programmation, en particulier le C++, afin de déterminer leur pertinence pour ce projet.
 
@@ -159,7 +159,7 @@ Il convient d'appliquer les filtres suivants :
 \begin{itemize}
     \item Processeur c\oe{}ur: ARM Cortex-M*
     \item En stock: Oui
-    \item Connectivité: I2C, UART, SPI
+    \item Connectivité: \gls{i2c}, UART, SPI
     \item Périphériques: PWM
     \item Boîtier: *QFN
     \item Boîtier fournisseur: Inférieur ou égal à (4x4)
@@ -168,10 +168,10 @@ Il convient d'appliquer les filtres suivants :
 Le choix d'un c\oe{}ur ARM Cortex-M assure une architecture ARM solide, idéale pour les systèmes embarqués.
 En ce qui concerne la taille du boîtier, une dimension égale ou inférieure à 4x4mm garantit la compacité du microcontrôleur.
 
-Cependant, il y a un critère qui ne peut pas être pris en compte lors de l'application des filtres, c'est la définition du nombre de bus I2C.
-En effet, il est nécessaire d'avoir deux bus de données I2C.
-Un qui fera partie de l'écosystème, et un autre qui permet, si nécessaire, de piloter un périphérique I2C.
-Il est donc essentiel de vérifier dans la fiche technique du microcontrôleur s'il dispose bien de deux bus I2C.
+Cependant, il y a un critère qui ne peut pas être pris en compte lors de l'application des filtres, c'est la définition du nombre de bus \gls{i2c}.
+En effet, il est nécessaire d'avoir deux bus de données \gls{i2c}.
+Un qui fera partie de l'écosystème, et un autre qui permet, si nécessaire, de piloter un périphérique \gls{i2c}.
+Il est donc essentiel de vérifier dans la fiche technique du microcontrôleur s'il dispose bien de deux bus \gls{i2c}.
 
 Environ 80 résultats correspondent aux critères définis.
 En analysant ces résultats, il est remarqué qu'il y a une présence significative de microcontrôleurs de la famille STM32.
@@ -182,7 +182,7 @@ Dans ce projet, l'objectif est d'utiliser un chargeur de démarrage et un microl
 Par conséquent, il est préférable de choisir le STM32G071GBU6 qui offre une plus grande capacité de mémoire flash et de RAM.
 Cela évitera de rencontrer des problèmes de mémoire lorsque des fonctionnalités supplémentaires seront ajoutées ultérieurement dans le projet.
 
-\section{\gls{framework}s}
+\section{Frameworks}
 
 Pour assurer un fonctionnement simple, une maintenance aisée et une portabilité du code, l'utilisation d'un \textit{\gls{framework}} de développement est intéressante.
 Celui-ci fait le lien entre un code plus abstrait et un code spécifique au microcontrôleur.
@@ -242,13 +242,13 @@ Par ailleurs, Mbed est un projet open source, accompagné d'une licence qui perm
 
 \section{Interface POSIX}
 
-L'interface POSIX est employée pour interagir avec les éléments du bus, favorisant ainsi une communication efficace avec les divers composants I2C et permettant d'exploiter pleinement les fonctionnalités développées dans ce projet.
+L'interface POSIX est employée pour interagir avec les éléments du bus, favorisant ainsi une communication efficace avec les divers composants \gls{i2c} et permettant d'exploiter pleinement les fonctionnalités développées dans ce projet.
 Cette interface inclut la détection des périphériques connectés au bus, la récupération des informations détaillées sur ces périphériques et la mise à jour du micrologiciel.
 Dans un souci de portabilité, l'interface sera implémentée en Python, un langage largement utilisé dans le domaine de l'embarqué, offrant une rapidité de développement des applications et une compatibilité avec de nombreux systèmes d'exploitation.
 
 \subsection{Découverte des périphériques}
 
-Dans Linux, il existe un outil appelé \texttt{i2cdetect} qui permet de détecter tous les périphériques connectés sur le bus I2C.
+Dans Linux, il existe un outil appelé \texttt{i2cdetect} qui permet de détecter tous les périphériques connectés sur le bus \gls{i2c}.
 Cet outil est issu du package \texttt{i2ctools}.
 Cependant, il y a une subtilité à prendre en compte.
 Par défaut, le programme effectue une lecture ou une écriture en fonction de l'adresse détectée.
@@ -261,14 +261,14 @@ Cela peut être réalisé en utilisant l'option \texttt{-r} de l'outil.
 Dans le cadre de ce projet, il peut être intéressant de mettre en place une détection supplémentaire permettant de détecter uniquement les périphériques compatibles avec le projet.
 À cet effet, un script Python a été développé.
 Ce script permet de détecter les périphériques de l'écosystème en se basant sur une réponse prédéfinie.
-Cela permet à l'utilisateur de distinguer rapidement et efficacement les périphériques compatibles avec le projet des autres périphériques présents sur le bus I2C.
+Cela permet à l'utilisateur de distinguer rapidement et efficacement les périphériques compatibles avec le projet des autres périphériques présents sur le bus \gls{i2c}.
 
 Lors de la détection des périphériques, plusieurs informations peuvent être affichées.
 Cela comprend notamment l'adresse, la version du micrologiciel, le type de périphérique, le groupe de périphérique, le nom et l'identifiant unique.
 
 \subsubsection{Adresse}
 
-L'adresse I2C d'un périphérique est intéressante à connaître, car elle permet d'utiliser le périphérique dans un autre contexte que celui de l'écosystème développé dans ce projet.
+L'adresse \gls{i2c} d'un périphérique est intéressante à connaître, car elle permet d'utiliser le périphérique dans un autre contexte que celui de l'écosystème développé dans ce projet.
 
 \subsubsection{Version du micrologiciel}
 
@@ -302,12 +302,12 @@ Elle permet de mettre à jour facilement et efficacement le micrologiciel des p�
 En utilisant la commande de mise à jour appropriée, le programme est en mesure de téléverser le nouveau micrologiciel sur le périphérique cible.
 Une fois la mise à jour terminée avec succès, le périphérique redémarre avec le nouveau micrologiciel.
 
-La mise à jour du micrologiciel peut être réalisée en utilisant l'adresse I2C du périphérique, le type de périphérique ou le groupe de périphériques.
+La mise à jour du micrologiciel peut être réalisée en utilisant l'adresse \gls{i2c} du périphérique, le type de périphérique ou le groupe de périphériques.
 Cette flexibilité permet de mettre à jour un ou plusieurs périphériques simultanément en exécutant une seule commande.
 
 \section{Auto-adressage}
 
-Sur un bus I2C, chaque périphérique doit avoir une adresse unique.
+Sur un bus \gls{i2c}, chaque périphérique doit avoir une adresse unique.
 Cependant, les périphériques utilisent la même méthode de génération, il est alors nécessaire de générer des adresses différentes tout en utilisant le même algorithme.
 Il est donc important de trouver une méthode pour générer une adresse unique pour chaque périphérique.
 
@@ -329,7 +329,7 @@ En utilisant cette formule spécifique, il est possible de calculer une adresse 
 
 Cependant, il est possible que deux périphériques obtiennent la même adresse malgré des identifiants uniques différents.
 Afin de résoudre ce problème, chaque périphérique doit être capable de détecter si l'adresse générée est déjà utilisée et générer une nouvelle adresse si nécessaire.
-Cependant, il est important que tous les périphériques ne vérifient pas simultanément la disponibilité de leur adresse générée, car cela pourrait provoquer des conflits sur le bus I2C et bloquer la communication.
+Cependant, il est important que tous les périphériques ne vérifient pas simultanément la disponibilité de leur adresse générée, car cela pourrait provoquer des conflits sur le bus \gls{i2c} et bloquer la communication.
 
 Pour prévenir de tels conflits, une approche consiste à générer un délai aléatoire pour chaque périphérique en utilisant son identifiant unique.
 Ce délai aléatoire est compris entre zéro et une seconde, ce qui permet de décaler la vérification de disponibilité de l'adresse pour chaque périphérique.
@@ -342,8 +342,8 @@ Grâce à cette méthode, il est possible de générer une adresse unique pour c
 Si lors de la vérification d'adresse, un périphérique détecte que l'adresse générée est déjà utilisée, il incrémente l'adresse et effectue à nouveau la vérification de disponibilité.
 Ce processus est répété jusqu'à ce qu'une adresse disponible soit trouvée.
 Étant donné que la plage d'adresse se limite à 0x6F, il est impossible d'obtenir une adresse supérieure à 0x6F.
-Sachant que l'adresse maximale en I2C est 0x7F, il y a une marge de sécurité.
-Toutefois, si toutes les adresses sont déjà prises, le bus I2C ne fonctionnera plus correctement.
+Sachant que l'adresse maximale en \gls{i2c} est 0x7F, il y a une marge de sécurité.
+Toutefois, si toutes les adresses sont déjà prises, le bus \gls{i2c} ne fonctionnera plus correctement.
 Dans ce cas, il sera nécessaire d'adapter l'algorithme en fonction des périphériques souhaités.
 
 \newpage
@@ -354,7 +354,7 @@ Le diagramme d'activité illustre le processus de génération d'adresse.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1.3]{./assets/figures/gen_addr.pdf}
-    \caption{Algorithme de génération d'adresse I2C}
+    \caption{Algorithme de génération d'adresse \gls{i2c}}
 \end{figure}
 
 \section{CI/CD}
@@ -389,27 +389,27 @@ Le processus comporte deux étapes principales.
 Dans un premier temps, l'objectif est de compiler le code afin de générer le fichier binaire du micrologiciel, qui pourra ensuite être téléversé sur un microcontrôleur.
 
 Dans un deuxième temps, il est souhaitable de téléverser le micrologiciel sur les microcontrôleurs concernés, si cela est possible.
-Cette étape nécessite une attention particulière, car le maître I2C doit être connecté à Internet.
-Si tel est le cas, il peut recevoir une notification indiquant la disponibilité d'une nouvelle version du micrologiciel et procéder à sa mise à jour directement sur les microcontrôleurs. Dans le cas où le maître I2C ne dispose pas d'une connexion Internet, la mise à jour sera effectuée dès que le maître I2C sera allumé et connecté à Internet.
+Cette étape nécessite une attention particulière, car le maître \gls{i2c} doit être connecté à Internet.
+Si tel est le cas, il peut recevoir une notification indiquant la disponibilité d'une nouvelle version du micrologiciel et procéder à sa mise à jour directement sur les microcontrôleurs. Dans le cas où le maître \gls{i2c} ne dispose pas d'une connexion Internet, la mise à jour sera effectuée dès que le maître \gls{i2c} sera allumé et connecté à Internet.
 
-En résumé, le système présenté offre la possibilité de mettre à jour les composants du bus I2C de manière automatique en modifiant le code sur Github à partir de n'importe quel ordinateur.
+En résumé, le système présenté offre la possibilité de mettre à jour les composants du bus \gls{i2c} de manière automatique en modifiant le code sur Github à partir de n'importe quel ordinateur.
 Cette approche présente un avantage significatif en termes de flexibilité, évitant ainsi les contraintes liées à une mise à jour traditionnelle qui exige l'utilisation d'un câble de reprogrammation pour chaque périphérique.
 
 \section{Gestion des erreurs}
 
-La gestion des erreurs n'étant pas prise en charge de manière native sur un bus I2C, il est pertinent de mettre en place un système de secours pour redémarrer les périphériques en cas de problèmes.
+La gestion des erreurs n'étant pas prise en charge de manière native sur un bus \gls{i2c}, il est pertinent de mettre en place un système de secours pour redémarrer les périphériques en cas de problèmes.
 Dans un premier temps, il est nécessaire de détecter les erreurs.
 Cette tâche peut être complexe à première vue, car les erreurs doivent être détectées depuis les périphériques esclaves du bus, étant donné que c'est l'élément contrôlé de manière totale.
 
 Dans un deuxième temps, il est requis de trouver une solution pour résoudre le problème.
 La solution la plus simple consiste à redémarrer le microcontrôleur.
-Cela garantit que si le maître I2C bloque la communication sur le périphérique, le redémarrage mettra fin à cet échange et réglera le problème.
+Cela garantit que si le maître \gls{i2c} bloque la communication sur le périphérique, le redémarrage mettra fin à cet échange et réglera le problème.
 
 Afin d'explorer les différentes solutions possibles pour détecter les erreurs de manière efficace, cette section se concentrera sur cette problématique.
 
 \subsection{Passage en mode maître}
 
-Une solution envisagée pour détecter les erreurs sur le bus I2C consiste à transformer périodiquement les esclaves I2C en maîtres pour analyser le bus.
+Une solution envisagée pour détecter les erreurs sur le bus \gls{i2c} consiste à transformer périodiquement les esclaves \gls{i2c} en maîtres pour analyser le bus.
 Cela permettrait de détecter facilement les erreurs sur le bus.
 Cependant, cette approche présente un désavantage important : lorsque le périphérique est en mode maître, il n'est plus disponible en tant qu'esclave pour répondre à ses tâches habituelles.
 
@@ -417,4 +417,4 @@ Ce désavantage rend cette solution non viable, car il est inacceptable de rendr
 
 \subsection{Analyse des signaux}
 
-L'analyse des signaux est une solution qui consiste à determiner ce qui est acceptable sur les signaux de l'I2C soit SDA et SCL. Une fois le comportement determiné, il est possible de determiner un comportement qui pose problème. En tant qu'esclave du bus I2C, il est possible d'analyser les signaux du bus I2C sans mettre en péril les communications I2C courantes.
+L'analyse des signaux est une solution qui consiste à déterminer ce qui est acceptable sur les signaux de l'\gls{i2c} soit SDA et SCL. Une fois le comportement déterminé, il est possible de déterminer un comportement qui pose problème. En tant qu'esclave du bus \gls{i2c}, il est possible d'analyser les signaux du bus \gls{i2c} sans mettre en péril les communications \gls{i2c} courantes.

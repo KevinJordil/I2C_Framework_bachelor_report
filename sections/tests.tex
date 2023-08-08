@@ -37,7 +37,7 @@ Lorsqu'un test est effectué sur un microcontrôleur, il fait référence au mic
 
 \begin{table}[H]
     \begin{center}
-        \caption{Tests : Déploiement via I2C\label{tab:deploiementi2c}}
+        \caption{Tests : Déploiement via \gls{i2c}\label{tab:deploiementi2c}}
         \begin{tabularx}{\textwidth}{X|X|c}
             Description                & Résultat attendu                                                                               & Status    \\ \hline
             Déployer un micrologiciel lorsque le microcontrôleur est dans l'application. & Le micrologiciel est téléversé. À la fin de l'envoi, le microcontrôleur démarre sur le micrologiciel. & \checkmark \\
@@ -75,14 +75,14 @@ Pour réaliser ces tests, il est nécessaire de connecter la sonde avec le conne
         \caption{Tests : Detection de périphériques\label{tab:detectionpériphériques}}
         \begin{tabularx}{\textwidth}{X|X|c}
             Description                & Résultat attendu                                                                               & Status    \\ \hline
-            Scanner le bus I2C avec l'utilitaire linux \textit{i2cdetect} & Les périphériques de l'écosystème sont détectés normalement. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Uniquement les périphériques compatibles avec l'écosystème sont détectés. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & L'identifiant unique de chaque périphérique compatible est affiché. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & L'adresse de chaque périphérique compatible est affichée. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le \textit{hash} du firmware de chaque périphérique compatible est affiché. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le groupe de chaque périphérique compatible est affiché. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le type de chaque périphérique compatible est affiché. & \checkmark \\
-            Scanner le bus I2C avec l'utilitaire réalisé dans ce projet. & Le nom de chaque périphérique compatible est affiché & \checkmark
+            Scanner le bus \gls{i2c} avec l'utilitaire linux \textit{i2cdetect} & Les périphériques de l'écosystème sont détectés normalement. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & Uniquement les périphériques compatibles avec l'écosystème sont détectés. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & L'identifiant unique de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & L'adresse de chaque périphérique compatible est affichée. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & Le \textit{hash} du firmware de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & Le groupe de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & Le type de chaque périphérique compatible est affiché. & \checkmark \\
+            Scanner le bus \gls{i2c} avec l'utilitaire réalisé dans ce projet. & Le nom de chaque périphérique compatible est affiché & \checkmark
         \end{tabularx}
     \end{center}
 \end{table}
@@ -94,8 +94,8 @@ Pour réaliser ces tests, il est nécessaire de connecter la sonde avec le conne
         \caption{Tests : Auto-adressage\label{tab:autoadressage}}
         \begin{tabularx}{\textwidth}{X|X|c}
             Description                & Résultat attendu                                                                               & Status    \\ \hline
-            Déployer le micrologiciel sur un périphérique. & Le périphérique possède une adresse I2C. & \checkmark \\
-            Déployer le même micrologiciel sur deux périphériques. & Chaque périphérique possède une adresse I2C différente. & \checkmark
+            Déployer le micrologiciel sur un périphérique. & Le périphérique possède une adresse \gls{i2c}. & \checkmark \\
+            Déployer le même micrologiciel sur deux périphériques. & Chaque périphérique possède une adresse \gls{i2c} différente. & \checkmark
         \end{tabularx}
     \end{center}
 \end{table}
