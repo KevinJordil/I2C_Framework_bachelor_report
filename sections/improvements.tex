@@ -44,7 +44,7 @@ Lorsqu'une interruption \gls{i2c} est mise en place, il est important de ne pas 
 Cela est une mauvaise pratique, car d'autres interruptions pourraient être bloquées.
 Une approche plus appropriée consisterait à démarrer un processus lors de l'interruption, qui se chargerait de traiter toutes les opérations \gls{i2c} nécessaires.
 Cette approche permettrait de quitter rapidement l'interruption \gls{i2c} tout en effectuant des traitements plus complexes en parallèle.
-Mbed offre une gestion simplifiée des processus, ce qui rend cette mise en œuvre réalisable.
+Mbed offre une gestion simplifiée des processus, ce qui rend cette mise en \oe{}uvre réalisable.
 
 De plus, le microcontrôleur choisi possède une fonctionnalité intéressante.
 Sur le bus \gls{i2c} 1, il est possible de réveiller le microcontrôleur. Si le microcontrôleur est en veille et qu'une connexion \gls{i2c} démarre, il peut sortir de veille automatiquement.

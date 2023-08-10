@@ -9,7 +9,7 @@ Tout d'abord, il est nécessaire d'avoir une unité qui agit comme le maître \g
 Dans ce cas, un Raspberry Pi modèle 3 a été utilisé.
 Il est possible d'utiliser une autre carte, à condition qu'elle permette d'installer un système d'exploitation capable d'exécuter du code Python.
 De plus, il est important d'avoir une connexion \gls{i2c} disponible.
-Dans ce projet, le Raspberry Pi est équipé de Raspbian.
+Dans ce projet, le Raspberry Pi est équipé de \textit{Raspberry Pi OS}.
 
 Ensuite, des cartes de développement sont nécessaires pour tester rapidement le code.
 STMicroelectronics fournit une gamme de cartes Nucleo équipées de microcontrôleurs STM32.
@@ -63,7 +63,6 @@ Il existe deux approches pour la mise à jour du micrologiciel via le bus \gls{i
 La première méthode consiste à télécharger le nouveau micrologiciel à partir de l'application exécutée par le microcontrôleur.
 Cela nécessite que le microcontrôleur dispose d'une quantité suffisante de mémoire pour stocker les deux micrologiciels.
 Ainsi au redémarrage, le chargeur de démarrage remplace l'ancien micrologiciel par le nouveau.
-Cependant, cette méthode nécessite une capacité de mémoire plus importante, car elle nécessite le stockage des deux micrologiciels.
 
 La deuxième méthode consiste à aller dans le chargeur de démarrage pour effectuer la mise à jour.
 Dans ce mode, le microcontrôleur est capable de recevoir le nouveau micrologiciel et de le programmer en mémoire.
